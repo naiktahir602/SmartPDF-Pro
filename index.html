@@ -3,18 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro - Free Converter</title>
+    <title>SmartPDF Pro - Your All-in-One Free Converter</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 </head>
-<body class="bg-slate-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center">
-        <h1 class="text-3xl font-bold text-blue-600 mb-4">SmartPDF Pro</h1>
-        <p class="text-gray-600 mb-6">Convert your Word, Excel & Images to PDF for Free!</p>
-        <div class="border-2 border-dashed border-blue-400 p-10 rounded-lg bg-blue-50">
-            <input type="file" id="fileInput" class="hidden">
-            <label for="fileInput" class="cursor-pointer text-blue-500 font-semibold">Click to Upload File</label>
+<body class="bg-slate-50 min-h-screen font-sans">
+    <nav class="bg-blue-600 p-4 text-white shadow-md text-center">
+        <h1 class="text-2xl font-bold italic">SmartPDF Pro</h1>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-6 mt-10">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-blue-500">
+                <h2 class="text-xl font-bold mb-4">📸 Image to PDF</h2>
+                <input type="file" id="imageInput" multiple accept="image/*" class="mb-4 block w-full text-sm text-gray-500">
+                <button onclick="convertImagesToPDF()" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Download PDF</button>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-green-500">
+                <h2 class="text-xl font-bold mb-4">🔗 Merge PDF Files</h2>
+                <input type="file" id="pdfInput" multiple accept=".pdf" class="mb-4 block w-full text-sm text-gray-500">
+                <button onclick="mergePDFFiles()" class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition">Merge & Download</button>
+            </div>
         </div>
-        <button class="mt-6 w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition">Convert Now</button>
-    </div>
+    </main>
+
+    <script>
+        async function convertImagesToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const input = document.getElementById('imageInput');
+            if (input.files.length === 0) return alert('Pehle images select karein!');
+
+            for (let i = 0; i < input.files.length; i++) {
+                const imgData = await new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.readAsDataURL(input.files[i]);
+                });
+                if (i > 0) doc.addPage();
+                doc.addImage(imgData, 'JPEG', 10, 10, 190, 0);
+            }
+            doc.save('SmartPDF_Converted.pdf');
+        }
+
+        async function mergePDFFiles() {
+            const input = document.getElementById('pdfInput');
+            if (input.files.length < 2) return alert('Kam se kam 2 PDF select karein!');
+            const mergedPdf = await PDFLib.PDFDocument.create();
+
+            for (const file of input.files) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
+                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                copiedPages.forEach(page => mergedPdf.addPage(page));
+            }
+
+            const pdfBytes = await mergedPdf.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'SmartPDF_Merged.pdf';
+            link.click();
+        }
+    </script>
 </body>
 </html>
