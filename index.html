@@ -3,73 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF PRO - Naik Tahir</title>
+    <title>SmartPDF PRO - Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
-    <nav class="bg-white border-b p-4 shadow-sm sticky top-0 z-50">
-        <h1 class="text-2xl font-black text-blue-600 text-center">SmartPDF <span class="text-gray-800">PRO</span></h1>
+
+    <nav class="bg-white border-b p-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <h1 class="text-2xl font-black text-blue-600 tracking-tighter">SmartPDF <span class="text-gray-800">PRO</span></h1>
+        <div class="flex gap-4">
+            <button class="text-sm font-bold text-gray-600 hover:text-blue-600">Login</button>
+            <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-600">Sign up</button>
+        </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto p-6 text-center">
-        <h2 class="text-3xl font-bold my-8">Har PDF ka hal, ab aapki apni website par!</h2>
+    <div class="text-center py-12 px-4">
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Every tool you need to work with PDFs in one place</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto italic">Every tool you need to use PDFs, at your fingertips. All are 100% FREE and easy to use!</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div onclick="document.getElementById('wordInput').click()" class="bg-white p-8 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer group">
-                <div class="text-5xl mb-4 group-hover:scale-110 transition">📄</div>
-                <h3 class="font-bold text-lg">WORD TO PDF</h3>
-                <p class="text-sm text-blue-500 mt-2 font-semibold">Click to Upload File</p>
-                <input type="file" id="wordInput" accept=".docx" class="hidden" onchange="convertWord(this)">
-            </div>
-
-            <div onclick="document.getElementById('imgInput').click()" class="bg-white p-8 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer group">
-                <div class="text-5xl mb-4 group-hover:scale-110 transition">🖼️</div>
-                <h3 class="font-bold text-lg">JPG TO PDF</h3>
-                <p class="text-sm text-blue-500 mt-2 font-semibold">Click to Upload Images</p>
-                <input type="file" id="imgInput" accept="image/*" multiple class="hidden" onchange="convertImg(this)">
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl border border-gray-100 opacity-60 text-center">
-                <div class="text-5xl mb-4">📊</div>
-                <h3 class="font-bold text-lg text-gray-400">PDF TO EXCEL</h3>
-                <p class="text-xs text-orange-500 font-bold mt-2">WORKING ON IT...</p>
-            </div>
+        <div onclick="alert('Merge PDF Feature Triggered')" class="bg-white p-6 rounded-xl border border-gray-200 hover:border-orange-500 hover:shadow-xl transition cursor-pointer group">
+            <div class="text-3xl mb-3">🔗</div>
+            <h3 class="font-bold text-sm uppercase">Merge PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Combine PDFs in the order you want.</p>
         </div>
-    </main>
 
-    <footer class="mt-20 py-10 border-t text-center text-gray-400 text-sm">
-        Developed with ❤️ by <span class="text-gray-900 font-bold text-lg">Naik Tahir</span>
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-orange-500 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">✂️</div>
+            <h3 class="font-bold text-sm uppercase">Split PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Separate one page or a whole set.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-green-600 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">🛠️</div>
+            <h3 class="font-bold text-sm uppercase text-green-700">Repair PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Recover data from corrupt PDF.</p>
+        </div>
+
+        <div onclick="document.getElementById('wordIn').click()" class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">🟦</div>
+            <h3 class="font-bold text-sm uppercase">PDF to Word</h3>
+            <input type="file" id="wordIn" class="hidden">
+            <p class="text-[10px] text-gray-400 mt-1">Convert PDF to DOCX easily.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-red-500 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">🔓</div>
+            <h3 class="font-bold text-sm uppercase">Unlock PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Remove PDF password security.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-400 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">🖋️</div>
+            <h3 class="font-bold text-sm uppercase">Sign PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Sign yourself or request signatures.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">💧</div>
+            <h3 class="font-bold text-sm uppercase">Watermark</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Stamp an image or text over PDF.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-yellow-500 hover:shadow-xl transition cursor-pointer">
+            <div class="text-3xl mb-3">🛡️</div>
+            <h3 class="font-bold text-sm uppercase">Protect PDF</h3>
+            <p class="text-[10px] text-gray-400 mt-1">Encrypt PDF with a password.</p>
+        </div>
+    </div>
+
+    <footer class="mt-20 py-10 border-t bg-white text-center">
+        <p class="text-gray-400 text-sm">© 2026 SmartPDF Pro - All Tools Local & Secure</p>
+        <p class="text-blue-600 font-bold mt-2">Developed with ❤️ by Naik Tahir</p>
     </footer>
 
-    <script>
-        async function convertWord(input) {
-            const file = input.files[0];
-            if(!file) return;
-            alert("File received! Converting " + file.name + " to PDF...");
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                const { value } = await mammoth.convertToHtml({arrayBuffer: e.target.result});
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.html(value, { callback: (d) => d.save('SmartPDF_Word.pdf'), x:15, y:15, width:170, windowWidth:650 });
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        async function convertImg(input) {
-            if(!input.files.length) return;
-            alert("Images received! Creating PDF...");
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            for(let i=0; i<input.files.length; i++){
-                const data = await new Promise(r => {const f=new FileReader(); f.onload=e=>r(e.target.result); f.readAsDataURL(input.files[i])});
-                if(i>0) doc.addPage();
-                doc.addImage(data, 'JPEG', 10, 10, 190, 0);
-            }
-            doc.save('SmartPDF_Images.pdf');
-        }
-    </script>
 </body>
 </html>
