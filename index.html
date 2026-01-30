@@ -3,106 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF PRO - Official Owner Dashboard</title>
+    <title>SmartPDF PRO - Official T.R</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 font-sans text-slate-900">
-
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm">
-        <div class="flex items-center gap-2">
-            <h1 class="text-2xl font-black tracking-tighter text-blue-600">SmartPDF <span class="text-slate-800">PRO</span></h1>
-        </div>
+<body class="bg-slate-50 font-sans">
+    <nav class="bg-white border-b p-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <h1 class="text-2xl font-black text-blue-600 tracking-tighter text-slate-800">SmartPDF <span class="text-blue-600">PRO</span></h1>
         <div class="flex gap-4">
-            <button onclick="openAuth()" class="text-sm font-bold text-slate-600">Login</button>
-            <button onclick="openAuth()" class="bg-[#e53935] text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-red-200">Sign up</button>
+            <button onclick="document.getElementById('authBox').classList.remove('hidden')" class="text-sm font-bold text-slate-600">Login</button>
+            <button onclick="document.getElementById('authBox').classList.remove('hidden')" class="bg-red-500 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg">Sign up</button>
         </div>
     </nav>
 
-    <div class="text-center py-16 bg-white border-b border-slate-100">
-        <h2 class="text-5xl font-extrabold text-slate-900 mb-4 px-4 tracking-tight">Every tool you need to work with PDFs</h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto px-6 italic">100% Free, Secure and Advanced PDF Tools</p>
+    <div class="text-center py-12 bg-white mb-8 border-b">
+        <h2 class="text-4xl font-extrabold text-slate-900 mb-2">Every tool you need to work with PDFs</h2>
+        <p class="text-slate-400 italic">100% Free, Secure and Advanced PDF Tools</p>
     </div>
 
-    <main class="max-w-7xl mx-auto p-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        
-        <div onclick="tool('PDF to Word')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white"><i class="fas fa-file-word text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">PDF to Word</h3>
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mx-auto mb-3 group-hover:bg-blue-600 group-hover:text-white"><i class="fas fa-file-word text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">PDF to Word</h3>
         </div>
-        <div onclick="tool('PDF to Excel')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-green-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mx-auto mb-4 group-hover:bg-green-600 group-hover:text-white"><i class="fas fa-file-excel text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">PDF to Excel</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-green-500 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mx-auto mb-3 group-hover:bg-green-600 group-hover:text-white"><i class="fas fa-file-excel text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">PDF to Excel</h3>
         </div>
-        <div onclick="tool('PDF to JPG')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-yellow-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 mx-auto mb-4 group-hover:bg-yellow-600 group-hover:text-white"><i class="fas fa-image text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">PDF to JPG</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-orange-500 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mx-auto mb-3 group-hover:bg-orange-600 group-hover:text-white"><i class="fas fa-file-powerpoint text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">PDF to PPT</h3>
         </div>
-
-        <div onclick="tool('Merge')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-indigo-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mx-auto mb-4 group-hover:bg-indigo-600 group-hover:text-white"><i class="fas fa-layer-group text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Merge PDF</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-red-500 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 mx-auto mb-3 group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-image text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">PDF to JPG</h3>
         </div>
-        <div onclick="tool('Split')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-red-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 mx-auto mb-4 group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-scissors text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Split PDF</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-indigo-500 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mx-auto mb-3 group-hover:bg-indigo-600 group-hover:text-white"><i class="fas fa-layer-group text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Merge PDF</h3>
         </div>
-        <div onclick="tool('Compress')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-teal-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mx-auto mb-4 group-hover:bg-teal-600 group-hover:text-white"><i class="fas fa-compress-arrows-alt text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Compress</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-red-600 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 mx-auto mb-3 group-hover:bg-red-600 group-hover:text-white"><i class="fas fa-scissors text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Split PDF</h3>
         </div>
-
-        <div onclick="tool('Unlock')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-orange-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mx-auto mb-4 group-hover:bg-orange-600 group-hover:text-white"><i class="fas fa-unlock text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Unlock PDF</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-yellow-600 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 mx-auto mb-3 group-hover:bg-yellow-600 group-hover:text-white"><i class="fas fa-unlock text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Unlock PDF</h3>
         </div>
-        <div onclick="tool('Protect')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-gray-800 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-800 mx-auto mb-4 group-hover:bg-gray-800 group-hover:text-white"><i class="fas fa-lock text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Protect PDF</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-gray-800 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-800 mx-auto mb-3 group-hover:bg-gray-800 group-hover:text-white"><i class="fas fa-lock text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Protect PDF</h3>
         </div>
-        <div onclick="tool('Watermark')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-400 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 mx-auto mb-4 group-hover:bg-blue-400 group-hover:text-white"><i class="fas fa-tint text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Watermark</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-400 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 mx-auto mb-3 group-hover:bg-blue-400 group-hover:text-white"><i class="fas fa-signature text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Sign PDF</h3>
         </div>
-        <div onclick="tool('Repair')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-green-700 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-700 mx-auto mb-4 group-hover:bg-green-700 group-hover:text-white"><i class="fas fa-tools text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Repair PDF</h3>
-        </div>
-        <div onclick="tool('Sign')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-slate-900 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 mx-auto mb-4 group-hover:bg-slate-900 group-hover:text-white"><i class="fas fa-signature text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Sign PDF</h3>
-        </div>
-        <div onclick="tool('Rotate')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-pink-500 hover:shadow-xl transition-all cursor-pointer group text-center">
-            <div class="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 mx-auto mb-4 group-hover:bg-pink-600 group-hover:text-white"><i class="fas fa-redo text-xl"></i></div>
-            <h3 class="font-bold text-[11px] uppercase">Rotate PDF</h3>
+        <div onclick="alert('Feature starting...')" class="bg-white p-6 rounded-3xl border border-slate-100 hover:border-green-800 hover:shadow-xl transition cursor-pointer text-center group">
+            <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-800 mx-auto mb-3 group-hover:bg-green-800 group-hover:text-white"><i class="fas fa-tools text-xl"></i></div>
+            <h3 class="font-bold text-[10px] uppercase">Repair PDF</h3>
         </div>
     </main>
 
-    <div id="authBox" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-md flex items-center justify-center z-[100] p-4">
-        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center border border-slate-100">
-            <h3 class="text-3xl font-black text-slate-800 mb-2">Welcome Owner</h3>
-            <p class="text-slate-400 text-sm mb-8">Login to manage SmartPDF PRO</p>
-            <div class="space-y-4">
-                <input type="email" placeholder="Admin Email" class="w-full bg-slate-50 border-0 p-4 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                <input type="password" placeholder="Password" class="w-full bg-slate-50 border-0 p-4 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                <button onclick="closeAuth()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-xl shadow-blue-200">Login to Dashboard</button>
-                <div class="py-2 flex items-center gap-2 text-slate-300"><hr class="flex-grow"><span>or</span><hr class="flex-grow"></div>
-                <button class="w-full border border-slate-200 py-3 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-50 transition text-sm">
-                    <img src="https://www.google.com/favicon.ico" class="w-4 h-4"> Official Google Login
-                </button>
-            </div>
+    <div id="authBox" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center">
+            <h3 class="text-3xl font-black mb-2">Owner Login</h3>
+            <p class="text-slate-400 text-sm mb-8 italic">T.R Official Dashboard</p>
+            <input type="email" placeholder="Email" class="w-full bg-slate-50 border p-4 rounded-2xl mb-3 outline-blue-600">
+            <input type="password" placeholder="Password" class="w-full bg-slate-50 border p-4 rounded-2xl mb-6 outline-blue-600">
+            <button onclick="document.getElementById('authBox').classList.add('hidden')" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold">Login Now</button>
         </div>
     </div>
 
     <footer class="mt-20 py-16 border-t bg-white text-center">
-        <p class="text-slate-400 text-sm italic">Developed by <span class="text-slate-900 font-bold text-lg">T.R</span></p>
-        <p class="text-[10px] text-slate-300 mt-2 uppercase tracking-widest font-black">Official SmartPDF Engine v2.0</p>
+        <p class="text-slate-400 text-sm italic tracking-widest uppercase font-black">Developed by <span class="text-slate-900 text-xl">T.R</span></p>
     </footer>
-
-    <script>
-        function tool(name) { alert("SmartPDF PRO: Starting " + name + "... Select your file to begin."); }
-        function openAuth() { document.getElementById('authBox').classList.remove('hidden'); }
-        function closeAuth() { document.getElementById('authBox').classList.add('hidden'); }
-    </script>
 </body>
 </html>
