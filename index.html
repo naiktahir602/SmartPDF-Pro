@@ -10,55 +10,57 @@
 </head>
 <body class="bg-gray-50 font-sans">
     <nav class="bg-white border-b p-4 shadow-sm sticky top-0 z-50">
-        <h1 class="text-2xl font-black text-blue-600">SmartPDF <span class="text-gray-800">PRO</span></h1>
+        <h1 class="text-2xl font-black text-blue-600 text-center">SmartPDF <span class="text-gray-800">PRO</span></h1>
     </nav>
 
     <main class="max-w-4xl mx-auto p-6 text-center">
         <h2 class="text-3xl font-bold my-8">Har PDF ka hal, ab aapki apni website par!</h2>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-            <div onclick="document.getElementById('wordIn').click()" class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer">
-                <div class="text-4xl mb-2">📄</div>
-                <h3 class="font-bold text-sm">WORD TO PDF</h3>
-                <input type="file" id="wordIn" accept=".docx" class="hidden" onchange="processWord(this)">
-                <p class="text-xs text-gray-400 mt-2">Click to Convert</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div onclick="document.getElementById('wordInput').click()" class="bg-white p-8 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="text-5xl mb-4 group-hover:scale-110 transition">📄</div>
+                <h3 class="font-bold text-lg">WORD TO PDF</h3>
+                <p class="text-sm text-blue-500 mt-2 font-semibold">Click to Upload File</p>
+                <input type="file" id="wordInput" accept=".docx" class="hidden" onchange="convertWord(this)">
             </div>
 
-            <div onclick="document.getElementById('imgIn').click()" class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer">
-                <div class="text-4xl mb-2">🖼️</div>
-                <h3 class="font-bold text-sm">JPG TO PDF</h3>
-                <input type="file" id="imgIn" accept="image/*" multiple class="hidden" onchange="processImg(this)">
-                <p class="text-xs text-gray-400 mt-2">Click to Convert</p>
+            <div onclick="document.getElementById('imgInput').click()" class="bg-white p-8 rounded-2xl border-2 border-transparent hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="text-5xl mb-4 group-hover:scale-110 transition">🖼️</div>
+                <h3 class="font-bold text-lg">JPG TO PDF</h3>
+                <p class="text-sm text-blue-500 mt-2 font-semibold">Click to Upload Images</p>
+                <input type="file" id="imgInput" accept="image/*" multiple class="hidden" onchange="convertImg(this)">
             </div>
-            
-            <div class="bg-white p-6 rounded-2xl border border-gray-200 opacity-50">
-                <div class="text-4xl mb-2">📊</div>
-                <h3 class="font-bold text-sm">PDF TO EXCEL</h3>
-                <p class="text-xs mt-2 italic text-blue-600 font-bold underline">Coming Soon</p>
+
+            <div class="bg-white p-8 rounded-2xl border border-gray-100 opacity-60 text-center">
+                <div class="text-5xl mb-4">📊</div>
+                <h3 class="font-bold text-lg text-gray-400">PDF TO EXCEL</h3>
+                <p class="text-xs text-orange-500 font-bold mt-2">WORKING ON IT...</p>
             </div>
         </div>
     </main>
 
-    <footer class="mt-20 py-10 text-center text-gray-400 text-sm">
-        Developed with ❤️ by Naik Tahir
+    <footer class="mt-20 py-10 border-t text-center text-gray-400 text-sm">
+        Developed with ❤️ by <span class="text-gray-900 font-bold text-lg">Naik Tahir</span>
     </footer>
 
     <script>
-        async function processWord(input) {
+        async function convertWord(input) {
             const file = input.files[0];
             if(!file) return;
-            alert("Converting " + file.name + "... Please wait.");
+            alert("File received! Converting " + file.name + " to PDF...");
             const reader = new FileReader();
             reader.onload = async (e) => {
                 const { value } = await mammoth.convertToHtml({arrayBuffer: e.target.result});
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.html(value, { callback: (d) => d.save('Converted.pdf'), x:10, y:10, width:180, windowWidth:650 });
+                doc.html(value, { callback: (d) => d.save('SmartPDF_Word.pdf'), x:15, y:15, width:170, windowWidth:650 });
             };
             reader.readAsArrayBuffer(file);
         }
 
-        async function processImg(input) {
+        async function convertImg(input) {
+            if(!input.files.length) return;
+            alert("Images received! Creating PDF...");
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             for(let i=0; i<input.files.length; i++){
@@ -66,7 +68,7 @@
                 if(i>0) doc.addPage();
                 doc.addImage(data, 'JPEG', 10, 10, 190, 0);
             }
-            doc.save('Images.pdf');
+            doc.save('SmartPDF_Images.pdf');
         }
     </script>
 </body>
