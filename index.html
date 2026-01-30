@@ -3,68 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro - Mega Toolkit</title>
+    <title>Smart PDF Pro - Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
-    <nav class="bg-white border-b p-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
-        <h1 class="text-2xl font-black text-blue-600 tracking-tighter">SmartPDF <span class="text-gray-800">PRO</span></h1>
-        <div class="hidden md:flex gap-6 text-sm font-bold">
-            <span>ALL TOOLS</span>
-            <span>CONVERT</span>
-            <span>MERGE</span>
+<body class="bg-[#0f172a] text-white font-sans min-h-screen">
+    <nav class="p-8 text-center border-b border-blue-500/20 bg-[#1e293b]/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="inline-block p-3 bg-blue-600 rounded-2xl mb-4 shadow-lg shadow-blue-500/20">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
         </div>
+        <h1 class="text-4xl font-extrabold tracking-tight">Smart PDF Pro</h1>
+        <p class="text-blue-400 mt-2 font-medium opacity-90">Manipulación profesional de documentos con motor de alto rendimiento</p>
     </nav>
 
-    <div class="max-w-7xl mx-auto p-8">
-        <h2 class="text-3xl font-bold text-center mb-10">Har PDF ka hal, ab aapki apni website par!</h2>
+    <main class="max-w-6xl mx-auto p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer group">
-                <div class="text-3xl mb-3">📄</div>
-                <h3 class="font-bold text-sm uppercase">Word to PDF</h3>
-                <p class="text-xs text-gray-500 mt-1">Make DOCX to PDF easily.</p>
-            </div>
+        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-blue-500/10 hover:border-blue-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity italic font-black text-4xl">PDF</div>
+            <h2 class="text-2xl font-bold text-blue-400 mb-6 flex items-center gap-3">
+                <span>📸</span> Image to PDF
+            </h2>
+            <input type="file" id="i" multiple accept="image/*" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+            <button onclick="itp()" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-900/40 transform active:scale-95 transition">Convertir ahora</button>
+        </div>
 
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
-                <div class="text-3xl mb-3">📊</div>
-                <h3 class="font-bold text-sm uppercase">PDF to Excel</h3>
-                <p class="text-xs text-gray-500 mt-1">Extract data to sheets.</p>
-            </div>
+        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-green-500/10 hover:border-green-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
+            <h2 class="text-2xl font-bold text-green-400 mb-6 flex items-center gap-3">
+                <span>🔗</span> Merge PDF
+            </h2>
+            <input type="file" id="p" multiple accept=".pdf" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer">
+            <button onclick="mp()" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-green-900/40 transform active:scale-95 transition">Unir archivos</button>
+        </div>
 
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
-                <div class="text-3xl mb-3">🖼️</div>
-                <h3 class="font-bold text-sm uppercase">JPG to PDF</h3>
-                <p class="text-xs text-gray-500 mt-1">Convert images in seconds.</p>
-            </div>
+        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-red-500/10 hover:border-red-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
+            <h2 class="text-2xl font-bold text-red-400 mb-6 flex items-center gap-3">
+                <span>📉</span> Compress
+            </h2>
+            <input type="file" id="c" accept=".pdf" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700 cursor-pointer">
+            <button onclick="cp()" class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-red-900/40 transform active:scale-95 transition">Reducir tamaño</button>
+        </div>
 
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
-                <div class="text-3xl mb-3">📝</div>
-                <h3 class="font-bold text-sm uppercase">Sign PDF</h3>
-                <p class="text-xs text-gray-500 mt-1">Add your digital signature.</p>
-            </div>
+    </main>
 
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
-                <div class="text-3xl mb-3">💧</div>
-                <h3 class="font-bold text-sm uppercase">Watermark</h3>
-                <p class="text-xs text-gray-500 mt-1">Protect with your logo.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition cursor-pointer">
-                <div class="text-3xl mb-3">📉</div>
-                <h3 class="font-bold text-sm uppercase">Compress</h3>
-                <p class="text-xs text-gray-500 mt-1">Reduce PDF file size.</p>
-            </div>
-
-            </div>
-    </div>
-
-    <footer class="bg-white border-t p-10 mt-20 text-center">
-        <p class="text-gray-500 text-sm italic">Developed with ❤️ by Naik Tahir</p>
+    <footer class="mt-20 py-12 border-t border-blue-500/10 text-center">
+        <div class="flex justify-center gap-8 mb-6 text-sm text-blue-400 font-medium">
+            <span>Privacidad local garantizada</span>
+            <span>Procesamiento ultra rápido</span>
+        </div>
+        <p class="text-gray-500 text-sm">© 2026 Smart PDF Pro. Developed by <span class="text-white font-bold">Naik Tahir</span></p>
     </footer>
+
+    <script>
+        async function itp(){const {jsPDF}=window.jspdf;const doc=new jsPDF();const files=document.getElementById('i').files;if(!files.length)return alert('Por favor seleccione imágenes');for(let i=0;i<files.length;i++){const data=await new Promise(r=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(files[i])});if(i>0)doc.addPage();doc.addImage(data,'JPEG',10,10,190,0);}doc.save('SmartPDF_Pro.pdf');}
+        async function mp(){const files=document.getElementById('p').files;if(files.length<2)return alert('Seleccione al menos 2 PDFs');const merged=await PDFLib.PDFDocument.create();for(const f of files){const pdf=await PDFLib.PDFDocument.load(await f.arrayBuffer());const pages=await merged.copyPages(pdf,pdf.getPageIndices());pages.forEach(p=>merged.addPage(p));}const bytes=await merged.save();const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));link.download='SmartPDF_Merged.pdf';link.click();}
+        async function cp(){const file=document.getElementById('c').files[0];if(!file)return alert('Seleccione un PDF');const arrayBuffer=await file.arrayBuffer();const pdfDoc=await PDFLib.PDFDocument.load(arrayBuffer);const pdfBytes=await pdfDoc.save({useObjectStreams:true});const blob=new Blob([pdfBytes],{type:'application/pdf'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='SmartPDF_Compressed.pdf';link.click();}
+    </script>
 </body>
 </html>
