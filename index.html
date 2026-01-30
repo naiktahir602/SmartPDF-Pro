@@ -3,69 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro - Your All-in-One Free Converter</title>
+    <title>SmartPDF Pro - Advance Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
-<body class="bg-slate-50 min-h-screen font-sans">
-    <nav class="bg-blue-600 p-4 text-white shadow-md text-center">
-        <h1 class="text-2xl font-bold italic">SmartPDF Pro</h1>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-700 p-5 text-white shadow-xl text-center">
+        <h1 class="text-3xl font-extrabold tracking-tight">SmartPDF Pro</h1>
     </nav>
 
-    <main class="max-w-4xl mx-auto p-6 mt-10">
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-blue-500">
-                <h2 class="text-xl font-bold mb-4">📸 Image to PDF</h2>
-                <input type="file" id="imageInput" multiple accept="image/*" class="mb-4 block w-full text-sm text-gray-500">
-                <button onclick="convertImagesToPDF()" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Download PDF</button>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-green-500">
-                <h2 class="text-xl font-bold mb-4">🔗 Merge PDF Files</h2>
-                <input type="file" id="pdfInput" multiple accept=".pdf" class="mb-4 block w-full text-sm text-gray-500">
-                <button onclick="mergePDFFiles()" class="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition">Merge & Download</button>
-            </div>
+    <div class="max-w-6xl mx-auto p-8 grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-blue-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-blue-600 mb-4">📸 Image to PDF</h2>
+            <input type="file" id="imgInput" multiple accept="image/*" class="mb-4 w-full text-sm">
+            <button onclick="imgToPdf()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Convert Images</button>
         </div>
-    </main>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-green-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-green-600 mb-4">🔗 Merge PDFs</h2>
+            <input type="file" id="pdfInput" multiple accept=".pdf" class="mb-4 w-full text-sm">
+            <button onclick="mergePdfs()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold">Merge Files</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-orange-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-orange-600 mb-4">📄 Word to PDF</h2>
+            <input type="file" id="wordInput" accept=".docx" class="mb-4 w-full text-sm">
+            <button onclick="wordToPdf()" class="w-full bg-orange-500 text-white py-3 rounded-xl font-bold">Convert Word</button>
+        </div>
+    </div>
 
     <script>
-        async function convertImagesToPDF() {
+        async function imgToPdf() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            const input = document.getElementById('imageInput');
-            if (input.files.length === 0) return alert('Pehle images select karein!');
-
-            for (let i = 0; i < input.files.length; i++) {
-                const imgData = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.onload = e => resolve(e.target.result);
-                    reader.readAsDataURL(input.files[i]);
-                });
-                if (i > 0) doc.addPage();
-                doc.addImage(imgData, 'JPEG', 10, 10, 190, 0);
+            const files = document.getElementById('imgInput').files;
+            if(!files.length) return alert('Select Images!');
+            for(let i=0; i<files.length; i++) {
+                const data = await new Promise(r => {const fr = new FileReader(); fr.onload=e=>r(e.target.result); fr.readAsDataURL(files[i])});
+                if(i>0) doc.addPage();
+                doc.addImage(data, 'JPEG', 10, 10, 190, 0);
             }
-            doc.save('SmartPDF_Converted.pdf');
+            doc.save('SmartPDF_Images.pdf');
         }
 
-        async function mergePDFFiles() {
-            const input = document.getElementById('pdfInput');
-            if (input.files.length < 2) return alert('Kam se kam 2 PDF select karein!');
-            const mergedPdf = await PDFLib.PDFDocument.create();
-
-            for (const file of input.files) {
-                const arrayBuffer = await file.arrayBuffer();
-                const pdf = await PDFLib.PDFDocument.load(arrayBuffer);
-                const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-                copiedPages.forEach(page => mergedPdf.addPage(page));
+        async function mergePdfs() {
+            const files = document.getElementById('pdfInput').files;
+            if(files.length < 2) return alert('Select at least 2 PDFs!');
+            const merged = await PDFLib.PDFDocument.create();
+            for(const f of files) {
+                const pdf = await PDFLib.PDFDocument.load(await f.arrayBuffer());
+                const pages = await merged.copyPages(pdf, pdf.getPageIndices());
+                pages.forEach(p => merged.addPage(p));
             }
-
-            const pdfBytes = await mergedPdf.save();
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const bytes = await merged.save();
             const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
+            link.href = URL.createObjectURL(new Blob([bytes], {type: 'application/pdf'}));
             link.download = 'SmartPDF_Merged.pdf';
             link.click();
+        }
+
+        async function wordToPdf() {
+            const file = document.getElementById('wordInput').files[0];
+            if(!file) return alert('Select a Word file!');
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const { value } = await mammoth.convertToHtml({arrayBuffer: e.target.result});
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.html(value, { callback: function(doc) { doc.save('Word_to_PDF.pdf'); }, x: 10, y: 10, width: 180, windowWidth: 650 });
+            };
+            reader.readAsArrayBuffer(file);
         }
     </script>
 </body>
