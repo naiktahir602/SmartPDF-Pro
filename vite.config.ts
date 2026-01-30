@@ -1,9 +1,9 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: "client",
+  // Ab humne 'root: client' hata diya hai kyunki index.html bahar hai
   build: {
-    outDir: "../dist",
+    outDir: "dist",
     emptyOutDir: true
   }
 });
