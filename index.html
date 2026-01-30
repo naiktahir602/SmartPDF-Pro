@@ -11,66 +11,20 @@
 
     <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <h1 class="text-2xl font-black tracking-tighter text-blue-600 uppercase">SmartPDF <span class="text-slate-800">PRO</span></h1>
-        <div class="flex gap-4">
-            <button onclick="openAuth()" class="text-sm font-bold text-slate-600">Login</button>
-            <button onclick="openAuth()" class="bg-red-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg">Sign up</button>
-        </div>
+        <button onclick="alert('Owner Login Active')" class="bg-slate-900 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg">Login</button>
     </nav>
 
     <header class="text-center py-16 bg-white border-b border-slate-100 px-4">
         <h2 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
             Har PDF ka hal, ab aapki apni website par!
         </h2>
-        <p class="text-slate-400 text-lg font-medium italic">
-            40+ High-Performance & Secure PDF Protocols
-        </p>
+        <p class="text-slate-400 text-lg font-medium">30 Premium Tools Integrated</p>
     </header>
 
     <main class="max-w-7xl mx-auto p-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-            <script>
-                const tools = [
-                    {n: 'Merge PDF', i: 'fa-layer-group', c: 'text-orange-500'}, {n: 'Split PDF', i: 'fa-scissors', c: 'text-red-500'},
-                    {n: 'Compress', i: 'fa-compress', c: 'text-teal-500'}, {n: 'Repair PDF', i: 'fa-tools', c: 'text-green-600'},
-                    {n: 'Unlock PDF', i: 'fa-unlock', c: 'text-yellow-600'}, {n: 'Protect', i: 'fa-lock', c: 'text-slate-800'},
-                    {n: 'Sign PDF', i: 'fa-signature', c: 'text-pink-500'}, {n: 'Watermark', i: 'fa-tint', c: 'text-blue-400'},
-                    {n: 'PDF to Word', i: 'fa-file-word', c: 'text-blue-700'}, {n: 'Word to PDF', i: 'fa-file-pdf', c: 'text-blue-500'},
-                    {n: 'PDF to Excel', i: 'fa-file-excel', c: 'text-emerald-600'}, {n: 'Excel to PDF', i: 'fa-file-pdf', c: 'text-green-500'},
-                    {n: 'PDF to PPT', i: 'fa-file-powerpoint', c: 'text-orange-600'}, {n: 'PPT to PDF', i: 'fa-file-pdf', c: 'text-red-400'},
-                    {n: 'PDF to JPG', i: 'fa-image', c: 'text-rose-500'}, {n: 'JPG to PDF', i: 'fa-file-image', c: 'text-rose-400'},
-                    {n: 'PDF to PNG', i: 'fa-images', c: 'text-purple-500'}, {n: 'PNG to PDF', i: 'fa-file-image', c: 'text-purple-400'},
-                    {n: 'HTML to PDF', i: 'fa-code', c: 'text-indigo-500'}, {n: 'PDF to HTML', i: 'fa-file-code', c: 'text-indigo-400'},
-                    {n: 'Edit PDF', i: 'fa-edit', c: 'text-blue-800'}, {n: 'Organize', i: 'fa-th-large', c: 'text-slate-600'},
-                    {n: 'Remove Pages', i: 'fa-trash-alt', c: 'text-red-700'}, {n: 'Extract Pages', i: 'fa-external-link-alt', c: 'text-blue-600'},
-                    {n: 'Rotate PDF', i: 'fa-redo', c: 'text-blue-500'}, {n: 'Page Numbers', i: 'fa-list-ol', c: 'text-slate-700'},
-                    {n: 'Header/Footer', i: 'fa-heading', c: 'text-blue-400'}, {n: 'Scan to PDF', i: 'fa-print', c: 'text-gray-600'},
-                    {n: 'OCR Text', i: 'fa-search', c: 'text-orange-700'}, {n: 'Crop PDF', i: 'fa-crop', c: 'text-emerald-700'},
-                    {n: 'Resize PDF', i: 'fa-expand-alt', c: 'text-teal-700'}, {n: 'Text to PDF', i: 'fa-file-alt', c: 'text-slate-900'},
-                    {n: 'PDF to PDF/A', i: 'fa-archive', c: 'text-amber-700'}, {n: 'Grayscale', i: 'fa-adjust', c: 'text-gray-500'},
-                    {n: 'Flatten PDF', i: 'fa-align-justify', c: 'text-indigo-700'}, {n: 'Compare PDF', i: 'fa-columns', c: 'text-blue-900'},
-                    {n: 'Redact PDF', i: 'fa-eraser', c: 'text-red-900'}, {n: 'Markup PDF', i: 'fa-marker', c: 'text-yellow-700'},
-                    {n: 'Reverse PDF', i: 'fa-history', c: 'text-purple-700'}, {n: 'PDF to Text', i: 'fa-font', c: 'text-slate-500'}
-                ];
-
-                tools.forEach(t => {
-                    document.write(`
-                        <div onclick="triggerAction('$\{t.n}')" class="group bg-white p-5 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer text-center">
-                            <div class="w-12 h-12 bg-slate-50 $\{t.c} rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                                <i class="fas $\{t.i} text-xl"></i>
-                            </div>
-                            <h3 class="font-bold text-[9px] uppercase tracking-tighter text-slate-700 leading-tight">$\{t.n}</h3>
-                        </div>
-                    `);
-                });
-
-                function triggerAction(name) {
-                    const input = document.getElementById('hiddenFile');
-                    input.setAttribute('data-tool', name);
-                    input.click();
-                }
-            </script>
-            <input type="file" id="hiddenFile" class="hidden" onchange="processFile(this)">
-        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="toolGrid">
+            </div>
+        <input type="file" id="fileAction" class="hidden" onchange="startEngine(this)">
     </main>
 
     <footer class="mt-24 py-16 border-t bg-white text-center">
@@ -78,21 +32,62 @@
         <h2 class="text-slate-900 text-5xl font-black tracking-tighter uppercase">T.R</h2>
     </footer>
 
-    <div id="authBox" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-[100] p-6">
-        <div class="bg-white p-12 rounded-[3rem] w-full max-w-sm shadow-2xl text-center">
-            <h3 class="text-2xl font-black text-slate-800 mb-8 uppercase tracking-tighter">Owner Login</h3>
-            <input type="password" placeholder="Admin PIN" class="w-full bg-slate-50 border-0 p-4 rounded-2xl mb-4 text-center font-bold outline-blue-600">
-            <button onclick="closeAuth()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black">Enter Engine</button>
-        </div>
-    </div>
-
     <script>
-        function openAuth() { document.getElementById('authBox').classList.remove('hidden'); }
-        function closeAuth() { document.getElementById('authBox').classList.add('hidden'); }
-        function processFile(input) {
-            const tool = input.getAttribute('data-tool');
+        const myTools = [
+            {name: 'Merge PDF', icon: 'fa-layer-group', color: 'text-orange-500'},
+            {name: 'Split PDF', icon: 'fa-scissors', color: 'text-red-500'},
+            {name: 'Compress PDF', icon: 'fa-compress', color: 'text-teal-500'},
+            {name: 'PDF to Word', icon: 'fa-file-word', color: 'text-blue-700'},
+            {name: 'Word to PDF', icon: 'fa-file-pdf', color: 'text-blue-500'},
+            {name: 'PDF to Excel', icon: 'fa-file-excel', color: 'text-emerald-600'},
+            {name: 'Excel to PDF', icon: 'fa-file-pdf', color: 'text-green-500'},
+            {name: 'PDF to JPG', icon: 'fa-image', color: 'text-rose-500'},
+            {name: 'JPG to PDF', icon: 'fa-file-image', color: 'text-rose-400'},
+            {name: 'Unlock PDF', icon: 'fa-unlock', color: 'text-yellow-600'},
+            {name: 'Protect PDF', icon: 'fa-lock', color: 'text-slate-800'},
+            {name: 'Sign PDF', icon: 'fa-signature', color: 'text-pink-500'},
+            {name: 'Watermark', icon: 'fa-tint', color: 'text-blue-400'},
+            {name: 'Repair PDF', icon: 'fa-tools', color: 'text-orange-600'},
+            {name: 'Rotate PDF', icon: 'fa-redo', color: 'text-blue-600'},
+            {name: 'PDF to PPT', icon: 'fa-file-powerpoint', color: 'text-orange-500'},
+            {name: 'PPT to PDF', icon: 'fa-file-pdf', color: 'text-red-600'},
+            {name: 'HTML to PDF', icon: 'fa-code', color: 'text-indigo-500'},
+            {name: 'PDF to PNG', icon: 'fa-images', color: 'text-purple-500'},
+            {name: 'Edit PDF', icon: 'fa-edit', color: 'text-blue-800'},
+            {name: 'Organize PDF', icon: 'fa-th-large', color: 'text-slate-600'},
+            {name: 'Remove Pages', icon: 'fa-trash-alt', color: 'text-red-700'},
+            {name: 'Extract Pages', icon: 'fa-external-link-alt', color: 'text-blue-400'},
+            {name: 'Page Numbers', icon: 'fa-list-ol', color: 'text-slate-700'},
+            {name: 'Scan to PDF', icon: 'fa-print', color: 'text-gray-500'},
+            {name: 'OCR Text', icon: 'fa-search', color: 'text-orange-700'},
+            {name: 'Crop PDF', icon: 'fa-crop', color: 'text-emerald-600'},
+            {name: 'Resize PDF', icon: 'fa-expand-alt', color: 'text-teal-600'},
+            {name: 'Text to PDF', icon: 'fa-file-alt', color: 'text-slate-900'},
+            {name: 'Reverse PDF', icon: 'fa-history', color: 'text-purple-600'}
+        ];
+
+        const grid = document.getElementById('toolGrid');
+        myTools.forEach(t => {
+            const card = document.createElement('div');
+            card.className = "group bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer text-center";
+            card.onclick = () => {
+                const input = document.getElementById('fileAction');
+                input.setAttribute('data-name', t.name);
+                input.click();
+            };
+            card.innerHTML = `
+                <div class="w-14 h-14 bg-slate-50 ${t.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                    <i class="fas ${t.icon} text-2xl"></i>
+                </div>
+                <h3 class="font-bold text-[10px] uppercase tracking-tighter text-slate-700">${t.name}</h3>
+            `;
+            grid.appendChild(card);
+        });
+
+        function startEngine(input) {
+            const toolName = input.getAttribute('data-name');
             if(input.files.length > 0) {
-                alert("T.R ENGINE v2.6 ACTIVE\n----------------------\nTOOL: " + tool + "\nFILE: " + input.files[0].name + "\n\nSTATUS: Processing safely...");
+                alert("T.R ENGINE ACTIVE\n------------------\nSelected: " + toolName + "\nFile: " + input.files[0].name + "\n\nStatus: Processing...");
             }
         }
     </script>
