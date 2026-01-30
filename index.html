@@ -3,61 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart PDF Pro - Official</title>
+    <title>SmartPDF PRO - Naik Tahir</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
-<body class="bg-[#0f172a] text-white font-sans min-h-screen">
-    <nav class="p-8 text-center border-b border-blue-500/20 bg-[#1e293b]/50 backdrop-blur-md sticky top-0 z-50">
-        <div class="inline-block p-3 bg-blue-600 rounded-2xl mb-4 shadow-lg shadow-blue-500/20">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-        </div>
-        <h1 class="text-4xl font-extrabold tracking-tight">Smart PDF Pro</h1>
-        <p class="text-blue-400 mt-2 font-medium opacity-90">Manipulación profesional de documentos con motor de alto rendimiento</p>
+<body class="bg-gray-50 font-sans">
+    <nav class="bg-white border-b p-4 shadow-sm sticky top-0 z-50">
+        <h1 class="text-2xl font-black text-blue-600">SmartPDF <span class="text-gray-800">PRO</span></h1>
     </nav>
 
-    <main class="max-w-6xl mx-auto p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+    <main class="max-w-4xl mx-auto p-6 text-center">
+        <h2 class="text-3xl font-bold my-8">Har PDF ka hal, ab aapki apni website par!</h2>
         
-        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-blue-500/10 hover:border-blue-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity italic font-black text-4xl">PDF</div>
-            <h2 class="text-2xl font-bold text-blue-400 mb-6 flex items-center gap-3">
-                <span>📸</span> Image to PDF
-            </h2>
-            <input type="file" id="i" multiple accept="image/*" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
-            <button onclick="itp()" class="w-full bg-blue-600 hover:bg-blue-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-blue-900/40 transform active:scale-95 transition">Convertir ahora</button>
-        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div onclick="document.getElementById('wordIn').click()" class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer">
+                <div class="text-4xl mb-2">📄</div>
+                <h3 class="font-bold text-sm">WORD TO PDF</h3>
+                <input type="file" id="wordIn" accept=".docx" class="hidden" onchange="processWord(this)">
+                <p class="text-xs text-gray-400 mt-2">Click to Convert</p>
+            </div>
 
-        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-green-500/10 hover:border-green-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
-            <h2 class="text-2xl font-bold text-green-400 mb-6 flex items-center gap-3">
-                <span>🔗</span> Merge PDF
-            </h2>
-            <input type="file" id="p" multiple accept=".pdf" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer">
-            <button onclick="mp()" class="w-full bg-green-600 hover:bg-green-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-green-900/40 transform active:scale-95 transition">Unir archivos</button>
+            <div onclick="document.getElementById('imgIn').click()" class="bg-white p-6 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-lg transition cursor-pointer">
+                <div class="text-4xl mb-2">🖼️</div>
+                <h3 class="font-bold text-sm">JPG TO PDF</h3>
+                <input type="file" id="imgIn" accept="image/*" multiple class="hidden" onchange="processImg(this)">
+                <p class="text-xs text-gray-400 mt-2">Click to Convert</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-2xl border border-gray-200 opacity-50">
+                <div class="text-4xl mb-2">📊</div>
+                <h3 class="font-bold text-sm">PDF TO EXCEL</h3>
+                <p class="text-xs mt-2 italic text-blue-600 font-bold underline">Coming Soon</p>
+            </div>
         </div>
-
-        <div class="group bg-[#1e293b] p-8 rounded-[2rem] border border-red-500/10 hover:border-red-500/50 transition-all duration-300 shadow-xl relative overflow-hidden">
-            <h2 class="text-2xl font-bold text-red-400 mb-6 flex items-center gap-3">
-                <span>📉</span> Compress
-            </h2>
-            <input type="file" id="c" accept=".pdf" class="text-sm mb-6 w-full block file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700 cursor-pointer">
-            <button onclick="cp()" class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-red-900/40 transform active:scale-95 transition">Reducir tamaño</button>
-        </div>
-
     </main>
 
-    <footer class="mt-20 py-12 border-t border-blue-500/10 text-center">
-        <div class="flex justify-center gap-8 mb-6 text-sm text-blue-400 font-medium">
-            <span>Privacidad local garantizada</span>
-            <span>Procesamiento ultra rápido</span>
-        </div>
-        <p class="text-gray-500 text-sm">© 2026 Smart PDF Pro. Developed by <span class="text-white font-bold">Naik Tahir</span></p>
+    <footer class="mt-20 py-10 text-center text-gray-400 text-sm">
+        Developed with ❤️ by Naik Tahir
     </footer>
 
     <script>
-        async function itp(){const {jsPDF}=window.jspdf;const doc=new jsPDF();const files=document.getElementById('i').files;if(!files.length)return alert('Por favor seleccione imágenes');for(let i=0;i<files.length;i++){const data=await new Promise(r=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(files[i])});if(i>0)doc.addPage();doc.addImage(data,'JPEG',10,10,190,0);}doc.save('SmartPDF_Pro.pdf');}
-        async function mp(){const files=document.getElementById('p').files;if(files.length<2)return alert('Seleccione al menos 2 PDFs');const merged=await PDFLib.PDFDocument.create();for(const f of files){const pdf=await PDFLib.PDFDocument.load(await f.arrayBuffer());const pages=await merged.copyPages(pdf,pdf.getPageIndices());pages.forEach(p=>merged.addPage(p));}const bytes=await merged.save();const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));link.download='SmartPDF_Merged.pdf';link.click();}
-        async function cp(){const file=document.getElementById('c').files[0];if(!file)return alert('Seleccione un PDF');const arrayBuffer=await file.arrayBuffer();const pdfDoc=await PDFLib.PDFDocument.load(arrayBuffer);const pdfBytes=await pdfDoc.save({useObjectStreams:true});const blob=new Blob([pdfBytes],{type:'application/pdf'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='SmartPDF_Compressed.pdf';link.click();}
+        async function processWord(input) {
+            const file = input.files[0];
+            if(!file) return;
+            alert("Converting " + file.name + "... Please wait.");
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const { value } = await mammoth.convertToHtml({arrayBuffer: e.target.result});
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                doc.html(value, { callback: (d) => d.save('Converted.pdf'), x:10, y:10, width:180, windowWidth:650 });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        async function processImg(input) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            for(let i=0; i<input.files.length; i++){
+                const data = await new Promise(r => {const f=new FileReader(); f.onload=e=>r(e.target.result); f.readAsDataURL(input.files[i])});
+                if(i>0) doc.addPage();
+                doc.addImage(data, 'JPEG', 10, 10, 190, 0);
+            }
+            doc.save('Images.pdf');
+        }
     </script>
 </body>
 </html>
