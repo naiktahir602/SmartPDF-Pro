@@ -1,26 +1,51 @@
-<div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-red-500 hover:shadow-2xl transition">
-    <h2 class="text-xl font-bold text-red-600 mb-4">📉 Compress PDF</h2>
-    <input type="file" id="compressInput" accept=".pdf" class="mb-4 w-full text-sm">
-    <button onclick="compressPdf()" class="w-full bg-red-500 text-white py-3 rounded-xl font-bold">Compress Size</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPDF Pro - All-in-One Toolkit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-blue-700 p-5 text-white shadow-xl text-center">
+        <h1 class="text-3xl font-extrabold tracking-tight">SmartPDF Pro</h1>
+    </nav>
 
-<script>
-async function compressPdf() {
-    const file = document.getElementById('compressInput').files[0];
-    if (!file) return alert('Pehle PDF select karein!');
-    
-    const arrayBuffer = await file.arrayBuffer();
-    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-    
-    // Compression Logic: Hum metadata aur unwanted objects saaf karte hain
-    pdfDoc.setTitle("");
-    pdfDoc.setAuthor("");
-    
-    const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'SmartPDF_Compressed.pdf';
-    link.click();
-}
-</script>
+    <div class="max-w-6xl mx-auto p-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-blue-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-blue-600 mb-4">📸 Image to PDF</h2>
+            <input type="file" id="imgInput" multiple accept="image/*" class="mb-4 w-full text-sm">
+            <button onclick="imgToPdf()" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">Convert</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-green-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-green-600 mb-4">🔗 Merge PDFs</h2>
+            <input type="file" id="pdfInput" multiple accept=".pdf" class="mb-4 w-full text-sm">
+            <button onclick="mergePdfs()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold">Merge</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-orange-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-orange-600 mb-4">📄 Word to PDF</h2>
+            <input type="file" id="wordInput" accept=".docx" class="mb-4 w-full text-sm">
+            <button onclick="wordToPdf()" class="w-full bg-orange-500 text-white py-3 rounded-xl font-bold">Word to PDF</button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md border-b-8 border-red-500 hover:shadow-2xl transition">
+            <h2 class="text-xl font-bold text-red-600 mb-4">📉 Compress PDF</h2>
+            <input type="file" id="compressInput" accept=".pdf" class="mb-4 w-full text-sm">
+            <button onclick="compressPdf()" class="w-full bg-red-500 text-white py-3 rounded-xl font-bold">Compress</button>
+        </div>
+    </div>
+
+    <script>
+        // Saara Logic (Image, Merge, Word, Compress) yahan ek saath hai
+        async function imgToPdf(){ const {jsPDF}=window.jspdf; const doc=new jsPDF(); const files=document.getElementById('imgInput').files; if(!files.length) return alert('Select Images!'); for(let i=0; i<files.length; i++){ const data=await new Promise(r=>{const fr=new FileReader(); fr.onload=e=>r(e.target.result); fr.readAsDataURL(files[i])}); if(i>0) doc.addPage(); doc.addImage(data,'JPEG',10,10,190,0);} doc.save('SmartPDF_Images.pdf');}
+        async function mergePdfs(){ const files=document.getElementById('pdfInput').files; if(files.length<2) return alert('Select at least 2 PDFs!'); const merged=await PDFLib.PDFDocument.create(); for(const f of files){ const pdf=await PDFLib.PDFDocument.load(await f.arrayBuffer()); const pages=await merged.copyPages(pdf, pdf.getPageIndices()); pages.forEach(p=>merged.addPage(p));} const bytes=await merged.save(); const link=document.createElement('a'); link.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'})); link.download='SmartPDF_Merged.pdf'; link.click();}
+        async function wordToPdf(){ const file=document.getElementById('wordInput').files[0]; if(!file) return alert('Select Word file!'); const reader=new FileReader(); reader.onload=async function(e){ const {value}=await mammoth.convertToHtml({arrayBuffer:e.target.result}); const {jsPDF}=window.jspdf; const doc=new jsPDF(); doc.html(value,{callback:function(doc){doc.save('Word_to_PDF.pdf');},x:10,y:10,width:180,windowWidth:650});}; reader.readAsArrayBuffer(file);}
+        async function compressPdf(){ const file=document.getElementById('compressInput').files[0]; if(!file) return alert('Select PDF!'); const arrayBuffer=await file.arrayBuffer(); const pdfDoc=await PDFLib.PDFDocument.load(arrayBuffer); const pdfBytes=await pdfDoc.save({useObjectStreams:true}); const blob=new Blob([pdfBytes],{type:'application/pdf'}); const link=document.createElement('a'); link.href=URL.createObjectURL(blob); link.download='SmartPDF_Compressed.pdf'; link.click();}
+    </script>
+</body>
+</html>
