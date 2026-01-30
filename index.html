@@ -3,111 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF PRO - T.R Official Engine</title>
+    <title>SmartPDF PRO - T.R Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-[#f8fafc] font-sans text-slate-900">
+<body class="bg-slate-50 font-sans text-slate-900">
 
-    <nav class="bg-white/90 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-200 px-8 py-5 flex justify-between items-center shadow-sm">
-        <div class="flex items-center gap-3">
-            <div class="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-200">
-                <i class="fas fa-bolt text-lg"></i>
-            </div>
-            <h1 class="text-2xl font-black tracking-tighter">SmartPDF <span class="text-blue-600">PRO</span></h1>
-        </div>
-        <div class="flex gap-4 items-center">
-            <span class="hidden md:block text-xs font-black text-slate-400 border px-3 py-1 rounded-full uppercase tracking-widest">v2.6 Owner Edition</span>
-            <button onclick="openAuth()" class="bg-slate-900 text-white px-8 py-2.5 rounded-full text-sm font-bold shadow-xl hover:scale-105 transition active:scale-95">Admin Login</button>
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <h1 class="text-2xl font-black tracking-tighter text-blue-600 uppercase">SmartPDF <span class="text-slate-800">PRO</span></h1>
+        <div class="flex gap-4">
+            <button onclick="openAuth()" class="text-sm font-bold text-slate-600">Login</button>
+            <button onclick="openAuth()" class="bg-red-500 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg">Sign up</button>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-16">
-        <div class="text-center mb-16">
-            <h2 class="text-6xl font-black text-slate-900 mb-6 tracking-tight leading-none">The Most Powerful <br><span class="text-blue-600">PDF Engine</span> of 2026</h2>
-            <p class="text-slate-400 text-xl max-w-2xl mx-auto font-medium">Fast, Private & Secure tools by <span class="text-slate-900 font-bold underline decoration-blue-500 underline-offset-4">T.R Official</span></p>
+    <header class="text-center py-16 bg-white border-b border-slate-100 px-4">
+        <h2 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
+            Har PDF ka hal, ab aapki apni website par!
+        </h2>
+        <p class="text-slate-400 text-lg font-medium italic">
+            40+ High-Performance & Secure PDF Protocols
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+            <script>
+                const tools = [
+                    {n: 'Merge PDF', i: 'fa-layer-group', c: 'text-orange-500'}, {n: 'Split PDF', i: 'fa-scissors', c: 'text-red-500'},
+                    {n: 'Compress', i: 'fa-compress', c: 'text-teal-500'}, {n: 'Repair PDF', i: 'fa-tools', c: 'text-green-600'},
+                    {n: 'Unlock PDF', i: 'fa-unlock', c: 'text-yellow-600'}, {n: 'Protect', i: 'fa-lock', c: 'text-slate-800'},
+                    {n: 'Sign PDF', i: 'fa-signature', c: 'text-pink-500'}, {n: 'Watermark', i: 'fa-tint', c: 'text-blue-400'},
+                    {n: 'PDF to Word', i: 'fa-file-word', c: 'text-blue-700'}, {n: 'Word to PDF', i: 'fa-file-pdf', c: 'text-blue-500'},
+                    {n: 'PDF to Excel', i: 'fa-file-excel', c: 'text-emerald-600'}, {n: 'Excel to PDF', i: 'fa-file-pdf', c: 'text-green-500'},
+                    {n: 'PDF to PPT', i: 'fa-file-powerpoint', c: 'text-orange-600'}, {n: 'PPT to PDF', i: 'fa-file-pdf', c: 'text-red-400'},
+                    {n: 'PDF to JPG', i: 'fa-image', c: 'text-rose-500'}, {n: 'JPG to PDF', i: 'fa-file-image', c: 'text-rose-400'},
+                    {n: 'PDF to PNG', i: 'fa-images', c: 'text-purple-500'}, {n: 'PNG to PDF', i: 'fa-file-image', c: 'text-purple-400'},
+                    {n: 'HTML to PDF', i: 'fa-code', c: 'text-indigo-500'}, {n: 'PDF to HTML', i: 'fa-file-code', c: 'text-indigo-400'},
+                    {n: 'Edit PDF', i: 'fa-edit', c: 'text-blue-800'}, {n: 'Organize', i: 'fa-th-large', c: 'text-slate-600'},
+                    {n: 'Remove Pages', i: 'fa-trash-alt', c: 'text-red-700'}, {n: 'Extract Pages', i: 'fa-external-link-alt', c: 'text-blue-600'},
+                    {n: 'Rotate PDF', i: 'fa-redo', c: 'text-blue-500'}, {n: 'Page Numbers', i: 'fa-list-ol', c: 'text-slate-700'},
+                    {n: 'Header/Footer', i: 'fa-heading', c: 'text-blue-400'}, {n: 'Scan to PDF', i: 'fa-print', c: 'text-gray-600'},
+                    {n: 'OCR Text', i: 'fa-search', c: 'text-orange-700'}, {n: 'Crop PDF', i: 'fa-crop', c: 'text-emerald-700'},
+                    {n: 'Resize PDF', i: 'fa-expand-alt', c: 'text-teal-700'}, {n: 'Text to PDF', i: 'fa-file-alt', c: 'text-slate-900'},
+                    {n: 'PDF to PDF/A', i: 'fa-archive', c: 'text-amber-700'}, {n: 'Grayscale', i: 'fa-adjust', c: 'text-gray-500'},
+                    {n: 'Flatten PDF', i: 'fa-align-justify', c: 'text-indigo-700'}, {n: 'Compare PDF', i: 'fa-columns', c: 'text-blue-900'},
+                    {n: 'Redact PDF', i: 'fa-eraser', c: 'text-red-900'}, {n: 'Markup PDF', i: 'fa-marker', c: 'text-yellow-700'},
+                    {n: 'Reverse PDF', i: 'fa-history', c: 'text-purple-700'}, {n: 'PDF to Text', i: 'fa-font', c: 'text-slate-500'}
+                ];
+
+                tools.forEach(t => {
+                    document.write(`
+                        <div onclick="triggerAction('$\{t.n}')" class="group bg-white p-5 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer text-center">
+                            <div class="w-12 h-12 bg-slate-50 $\{t.c} rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                <i class="fas $\{t.i} text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-[9px] uppercase tracking-tighter text-slate-700 leading-tight">$\{t.n}</h3>
+                        </div>
+                    `);
+                });
+
+                function triggerAction(name) {
+                    const input = document.getElementById('hiddenFile');
+                    input.setAttribute('data-tool', name);
+                    input.click();
+                }
+            </script>
+            <input type="file" id="hiddenFile" class="hidden" onchange="processFile(this)">
         </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
-            
-            <div onclick="openTool('merge')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-blue-500 hover:shadow-[0_20px_50px_rgba(37,99,235,0.1)] transition-all cursor-pointer relative overflow-hidden">
-                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class="fas fa-object-group text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">Merge PDF</h3>
-                <input type="file" id="merge" class="hidden" multiple onchange="handleFile(this, 'Merging')">
-            </div>
-
-            <div onclick="openTool('word')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-indigo-500 hover:shadow-[0_20px_50px_rgba(79,70,229,0.1)] transition-all cursor-pointer">
-                <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-5 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                    <i class="fas fa-file-word text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">PDF to Word</h3>
-                <input type="file" id="word" class="hidden" onchange="handleFile(this, 'Converting to Word')">
-            </div>
-
-            <div onclick="openTool('excel')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-emerald-500 hover:shadow-[0_20px_50px_rgba(16,185,129,0.1)] transition-all cursor-pointer">
-                <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                    <i class="fas fa-file-excel text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">PDF to Excel</h3>
-                <input type="file" id="excel" class="hidden" onchange="handleFile(this, 'Extracting Data')">
-            </div>
-
-            <div onclick="openTool('lock')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-slate-900 hover:shadow-2xl transition-all cursor-pointer">
-                <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-800 mb-5 group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                    <i class="fas fa-lock text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">Protect PDF</h3>
-                <input type="file" id="lock" class="hidden">
-            </div>
-
-            <div onclick="openTool('repair')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-orange-500 hover:shadow-2xl transition-all cursor-pointer">
-                <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mb-5 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                    <i class="fas fa-medkit text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">Repair PDF</h3>
-                <input type="file" id="repair" class="hidden">
-            </div>
-
-            <div onclick="openTool('sign')" class="group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:border-pink-500 hover:shadow-2xl transition-all cursor-pointer">
-                <div class="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 mb-5 group-hover:bg-pink-600 group-hover:text-white transition-colors">
-                    <i class="fas fa-signature text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-xs uppercase tracking-tight text-slate-700">Sign PDF</h3>
-                <input type="file" id="sign" class="hidden">
-            </div>
-
-            </div>
     </main>
 
+    <footer class="mt-24 py-16 border-t bg-white text-center">
+        <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em] mb-2">Developed by</p>
+        <h2 class="text-slate-900 text-5xl font-black tracking-tighter uppercase">T.R</h2>
+    </footer>
+
     <div id="authBox" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-[100] p-6">
-        <div class="bg-white p-12 rounded-[3rem] w-full max-w-md shadow-2xl text-center border border-slate-100 relative">
-            <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-blue-600 w-24 h-24 rounded-full flex items-center justify-center text-white border-8 border-slate-50 shadow-xl text-3xl font-black">T.R</div>
-            <h3 class="text-3xl font-black text-slate-900 mb-2 mt-8">Admin Dashboard</h3>
-            <p class="text-slate-400 mb-8 font-medium italic">Welcome back, Boss!</p>
-            <div class="space-y-4 text-left">
-                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Owner Email</label>
-                <input type="email" placeholder="t.r@smartpdf.pro" class="w-full bg-slate-50 border-0 p-5 rounded-3xl focus:ring-2 focus:ring-blue-500 outline-none font-bold">
-                <button onclick="closeAuth()" class="w-full bg-blue-600 text-white py-5 rounded-3xl font-black text-lg shadow-2xl shadow-blue-200 active:scale-95 transition mt-4">Access Engine</button>
-            </div>
+        <div class="bg-white p-12 rounded-[3rem] w-full max-w-sm shadow-2xl text-center">
+            <h3 class="text-2xl font-black text-slate-800 mb-8 uppercase tracking-tighter">Owner Login</h3>
+            <input type="password" placeholder="Admin PIN" class="w-full bg-slate-50 border-0 p-4 rounded-2xl mb-4 text-center font-bold outline-blue-600">
+            <button onclick="closeAuth()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black">Enter Engine</button>
         </div>
     </div>
 
-    <footer class="mt-32 py-20 border-t bg-white text-center">
-        <div class="mb-6 opacity-30 grayscale"><h1 class="text-xl font-black tracking-tighter">SmartPDF PRO</h1></div>
-        <p class="text-slate-400 text-sm font-black uppercase tracking-[0.3em]">Developed by <span class="text-slate-900 text-2xl">T.R</span></p>
-    </footer>
-
     <script>
-        function openTool(id) { document.getElementById(id).click(); }
-        function handleFile(input, action) {
-            if(input.files.length > 0) {
-                alert("SmartPDF PRO Engine (v2.6) Started!\nAction: " + action + "\nFile: " + input.files[0].name + "\n\nProcessing Locally for T.R Official...");
-            }
-        }
         function openAuth() { document.getElementById('authBox').classList.remove('hidden'); }
         function closeAuth() { document.getElementById('authBox').classList.add('hidden'); }
+        function processFile(input) {
+            const tool = input.getAttribute('data-tool');
+            if(input.files.length > 0) {
+                alert("T.R ENGINE v2.6 ACTIVE\n----------------------\nTOOL: " + tool + "\nFILE: " + input.files[0].name + "\n\nSTATUS: Processing safely...");
+            }
+        }
     </script>
 </body>
 </html>
