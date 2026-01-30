@@ -3,141 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF PRO - Ultimate All-in-One Toolkit</title>
+    <title>SmartPDF PRO - Ultimate Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 font-sans text-slate-900">
+<body class="bg-slate-50 font-sans">
 
-    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm">
+    <nav class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <div class="bg-blue-600 p-2 rounded-lg text-white"><i class="fas fa-file-pdf text-xl"></i></div>
             <h1 class="text-2xl font-black tracking-tighter text-slate-800">SmartPDF <span class="text-blue-600">PRO</span></h1>
         </div>
-        <div class="flex gap-4 items-center">
-            <button onclick="openAuth()" class="hidden md:block text-sm font-bold text-slate-600 hover:text-blue-600 transition">Log In</button>
-            <button onclick="openAuth()" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg shadow-red-200 transition">Get Started Free</button>
+        <div class="flex gap-4">
+            <button onclick="openAuth()" class="text-sm font-bold text-slate-600">Login</button>
+            <button onclick="openAuth()" class="bg-red-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-red-200">Sign up</button>
         </div>
     </nav>
 
-    <div class="fixed top-20 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-    <div class="fixed bottom-20 right-10 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-700"></div>
+    <div class="text-center py-16 bg-white border-b border-slate-100">
+        <h2 class="text-5xl font-extrabold text-slate-900 mb-4 px-4">Har PDF ka hal, ab aapki apni website par!</h2>
+        <p class="text-slate-400 text-lg italic max-w-2xl mx-auto">100% Free, Secure and Advanced PDF Tools by Naik Tahir</p>
+    </div>
 
-    <main class="relative max-w-7xl mx-auto px-6 py-12">
-        <div class="text-center mb-16">
-            <h2 class="text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">Powerful PDF Tools for Everyone</h2>
-            <p class="text-slate-500 text-xl max-w-3xl mx-auto leading-relaxed">Fast, secure, and 100% free. Process your documents locally with Naik Tahir's advanced engine.</p>
-        </div>
-
-        <div class="mb-12">
-            <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                <span class="w-8 h-px bg-slate-300"></span> Convert from PDF
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <div onclick="toolAction('PDF to Word')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-file-word text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">PDF to Word</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Convert PDF to DOCX with high accuracy.</p>
+    <main class="max-w-7xl mx-auto p-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            
+            <div onclick="tool('Merge')" class="bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-blue-500 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <i class="fas fa-layer-group text-xl"></i>
                 </div>
-                <div onclick="toolAction('PDF to Excel')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-green-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600 mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-file-excel text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">PDF to Excel</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Extract tables to XLSX spreadsheets.</p>
-                </div>
-                <div onclick="toolAction('PDF to PPT')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-orange-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 mb-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-file-powerpoint text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">PDF to PPT</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Turn PDF into editable PPTX slides.</p>
-                </div>
-                <div onclick="toolAction('PDF to JPG')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-red-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 mb-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-image text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">PDF to JPG</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Extract images or save pages as JPG.</p>
-                </div>
+                <h3 class="font-bold text-sm uppercase text-slate-700">Merge PDF</h3>
+                <p class="text-[10px] text-slate-400 mt-2 leading-tight">Combine files in the order you want.</p>
             </div>
-        </div>
 
-        <div class="mb-12">
-            <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                <span class="w-8 h-px bg-slate-300"></span> Optimize & Organize
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <div onclick="toolAction('Merge')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-indigo-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-4">
-                        <i class="fas fa-layer-group text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">Merge PDF</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Combine multiple files into one.</p>
+            <div onclick="tool('Split')" class="bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-red-500 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 mb-4 group-hover:bg-red-600 group-hover:text-white transition-all">
+                    <i class="fas fa-scissors text-xl"></i>
                 </div>
-                <div onclick="toolAction('Compress')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-teal-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mb-4">
-                        <i class="fas fa-compress-arrows-alt text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">Compress</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Reduce size while keeping quality.</p>
-                </div>
-                <div onclick="toolAction('Repair')" class="group bg-white p-6 rounded-3xl border border-slate-100 hover:border-yellow-500 hover:shadow-2xl transition-all cursor-pointer">
-                    <div class="w-12 h-12 bg-yellow-50 rounded-2xl flex items-center justify-center text-yellow-600 mb-4">
-                        <i class="fas fa-tools text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-slate-800">Repair PDF</h4>
-                    <p class="text-[11px] text-slate-400 mt-2">Fix corrupted or damaged PDFs.</p>
-                </div>
+                <h3 class="font-bold text-sm uppercase text-slate-700">Split PDF</h3>
+                <p class="text-[10px] text-slate-400 mt-2 leading-tight">Separate one page or a whole set.</p>
             </div>
+
+            <div onclick="tool('Compress')" class="bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-teal-500 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 mb-4 group-hover:bg-teal-600 group-hover:text-white transition-all">
+                    <i class="fas fa-compress-arrows-alt text-xl"></i>
+                </div>
+                <h3 class="font-bold text-sm uppercase text-slate-700">Compress PDF</h3>
+                <p class="text-[10px] text-slate-400 mt-2 leading-tight">Reduce size while keeping quality.</p>
+            </div>
+
+            <div onclick="tool('PDF to Word')" class="bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-blue-400 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 mb-4 group-hover:bg-blue-400 group-hover:text-white transition-all">
+                    <i class="fas fa-file-word text-xl"></i>
+                </div>
+                <h3 class="font-bold text-sm uppercase text-slate-700">PDF to Word</h3>
+                <p class="text-[10px] text-slate-400 mt-2 leading-tight">Convert PDF to DOCX easily.</p>
+            </div>
+
+            <div onclick="tool('Sign')" class="bg-white p-6 rounded-[2rem] border border-slate-100 hover:border-slate-800 hover:shadow-2xl transition-all cursor-pointer group">
+                <div class="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-800 mb-4 group-hover:bg-slate-800 group-hover:text-white transition-all">
+                    <i class="fas fa-signature text-xl"></i>
+                </div>
+                <h3 class="font-bold text-sm uppercase text-slate-700">Sign PDF</h3>
+                <p class="text-[10px] text-slate-400 mt-2 leading-tight">Sign yourself or request signatures.</p>
+            </div>
+
         </div>
     </main>
 
-    <div id="authModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center z-[100] px-4">
-        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-md shadow-2xl relative">
-            <button onclick="closeAuth()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
-            <div class="text-center mb-8">
-                <h3 class="text-3xl font-black text-slate-900 mb-2">Welcome Back</h3>
-                <p class="text-slate-400">Please enter your details to continue.</p>
-            </div>
-            <div class="space-y-4">
-                <div class="relative">
-                    <i class="fas fa-envelope absolute left-4 top-4 text-slate-300"></i>
-                    <input type="email" placeholder="Email Address" class="w-full bg-slate-50 border-0 p-4 pl-12 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div class="relative">
-                    <i class="fas fa-lock absolute left-4 top-4 text-slate-300"></i>
-                    <input type="password" placeholder="Password" class="w-full bg-slate-50 border-0 p-4 pl-12 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <button class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-200 active:scale-95 transition">Login to SmartPDF</button>
-                <div class="text-center py-2 text-slate-400 text-sm">Or login with</div>
-                <button class="w-full border border-slate-200 py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-slate-50 transition">
-                    <img src="https://www.google.com/favicon.ico" class="w-5 h-5"> Google Account
-                </button>
-            </div>
+    <div id="authBox" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
+        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center">
+            <h3 class="text-3xl font-black mb-2">Welcome</h3>
+            <p class="text-slate-400 text-sm mb-8">Login to SmartPDF PRO</p>
+            <input type="email" placeholder="Email" class="w-full bg-slate-50 border-0 p-4 rounded-2xl mb-3 focus:ring-2 focus:ring-blue-500 outline-none">
+            <input type="password" placeholder="Password" class="w-full bg-slate-50 border-0 p-4 rounded-2xl mb-6 focus:ring-2 focus:ring-blue-500 outline-none">
+            <button onclick="closeAuth()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold shadow-xl shadow-blue-200">Login Now</button>
+            <p class="mt-4 text-xs text-slate-400 cursor-pointer" onclick="closeAuth()">Close</p>
         </div>
     </div>
 
-    <footer class="bg-white border-t border-slate-200 mt-20 py-16 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="flex items-center gap-2 grayscale">
-                <h1 class="text-xl font-black tracking-tighter text-slate-800">SmartPDF PRO</h1>
-            </div>
-            <div class="flex gap-8 text-sm font-bold text-slate-400">
-                <a href="#" class="hover:text-blue-600">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-600">Terms of Use</a>
-                <a href="#" class="hover:text-blue-600">Contact Us</a>
-            </div>
-            <p class="text-slate-400 text-sm italic">Crafted with precision by <span class="text-slate-900 font-bold">Naik Tahir</span></p>
-        </div>
+    <footer class="mt-20 py-16 border-t bg-white text-center">
+        <p class="text-slate-400 text-sm">© 2026 SmartPDF Pro - All Tools Local & Secure</p>
+        <p class="text-blue-600 font-bold mt-2">Developed with ❤️ by Naik Tahir</p>
     </footer>
 
     <script>
-        function toolAction(name) { alert(name + " feature is being optimized for your device. Launching soon!"); }
-        function openAuth() { document.getElementById('authModal').classList.remove('hidden'); }
-        function closeAuth() { document.getElementById('authModal').classList.add('hidden'); }
+        function tool(name) { alert(name + " feature starting! Select your file."); }
+        function openAuth() { document.getElementById('authBox').classList.remove('hidden'); }
+        function closeAuth() { document.getElementById('authBox').classList.add('hidden'); }
     </script>
 </body>
 </html>
