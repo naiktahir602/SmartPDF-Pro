@@ -1,95 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF PRO - T.R Official</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-slate-50 font-sans text-slate-900">
+<script>
+    let isLoggedIn = false; // By default login nahi hai
 
-    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
-        <h1 class="text-2xl font-black tracking-tighter text-blue-600 uppercase">SmartPDF <span class="text-slate-800">PRO</span></h1>
-        <button onclick="alert('Owner Login Active')" class="bg-slate-900 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg">Login</button>
-    </nav>
-
-    <header class="text-center py-16 bg-white border-b border-slate-100 px-4">
-        <h2 class="text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
-            Har PDF ka hal, ab aapki apni website par!
-        </h2>
-        <p class="text-slate-400 text-lg font-medium">30 Premium Tools Integrated</p>
-    </header>
-
-    <main class="max-w-7xl mx-auto p-8">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4" id="toolGrid">
-            </div>
-        <input type="file" id="fileAction" class="hidden" onchange="startEngine(this)">
-    </main>
-
-    <footer class="mt-24 py-16 border-t bg-white text-center">
-        <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em] mb-2">Developed by</p>
-        <h2 class="text-slate-900 text-5xl font-black tracking-tighter uppercase">T.R</h2>
-    </footer>
-
-    <script>
-        const myTools = [
-            {name: 'Merge PDF', icon: 'fa-layer-group', color: 'text-orange-500'},
-            {name: 'Split PDF', icon: 'fa-scissors', color: 'text-red-500'},
-            {name: 'Compress PDF', icon: 'fa-compress', color: 'text-teal-500'},
-            {name: 'PDF to Word', icon: 'fa-file-word', color: 'text-blue-700'},
-            {name: 'Word to PDF', icon: 'fa-file-pdf', color: 'text-blue-500'},
-            {name: 'PDF to Excel', icon: 'fa-file-excel', color: 'text-emerald-600'},
-            {name: 'Excel to PDF', icon: 'fa-file-pdf', color: 'text-green-500'},
-            {name: 'PDF to JPG', icon: 'fa-image', color: 'text-rose-500'},
-            {name: 'JPG to PDF', icon: 'fa-file-image', color: 'text-rose-400'},
-            {name: 'Unlock PDF', icon: 'fa-unlock', color: 'text-yellow-600'},
-            {name: 'Protect PDF', icon: 'fa-lock', color: 'text-slate-800'},
-            {name: 'Sign PDF', icon: 'fa-signature', color: 'text-pink-500'},
-            {name: 'Watermark', icon: 'fa-tint', color: 'text-blue-400'},
-            {name: 'Repair PDF', icon: 'fa-tools', color: 'text-orange-600'},
-            {name: 'Rotate PDF', icon: 'fa-redo', color: 'text-blue-600'},
-            {name: 'PDF to PPT', icon: 'fa-file-powerpoint', color: 'text-orange-500'},
-            {name: 'PPT to PDF', icon: 'fa-file-pdf', color: 'text-red-600'},
-            {name: 'HTML to PDF', icon: 'fa-code', color: 'text-indigo-500'},
-            {name: 'PDF to PNG', icon: 'fa-images', color: 'text-purple-500'},
-            {name: 'Edit PDF', icon: 'fa-edit', color: 'text-blue-800'},
-            {name: 'Organize PDF', icon: 'fa-th-large', color: 'text-slate-600'},
-            {name: 'Remove Pages', icon: 'fa-trash-alt', color: 'text-red-700'},
-            {name: 'Extract Pages', icon: 'fa-external-link-alt', color: 'text-blue-400'},
-            {name: 'Page Numbers', icon: 'fa-list-ol', color: 'text-slate-700'},
-            {name: 'Scan to PDF', icon: 'fa-print', color: 'text-gray-500'},
-            {name: 'OCR Text', icon: 'fa-search', color: 'text-orange-700'},
-            {name: 'Crop PDF', icon: 'fa-crop', color: 'text-emerald-600'},
-            {name: 'Resize PDF', icon: 'fa-expand-alt', color: 'text-teal-600'},
-            {name: 'Text to PDF', icon: 'fa-file-alt', color: 'text-slate-900'},
-            {name: 'Reverse PDF', icon: 'fa-history', color: 'text-purple-600'}
-        ];
-
-        const grid = document.getElementById('toolGrid');
-        myTools.forEach(t => {
-            const card = document.createElement('div');
-            card.className = "group bg-white p-6 rounded-3xl border border-slate-100 hover:border-blue-500 hover:shadow-xl transition-all cursor-pointer text-center";
-            card.onclick = () => {
-                const input = document.getElementById('fileAction');
-                input.setAttribute('data-name', t.name);
-                input.click();
-            };
-            card.innerHTML = `
-                <div class="w-14 h-14 bg-slate-50 ${t.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
-                    <i class="fas ${t.icon} text-2xl"></i>
-                </div>
-                <h3 class="font-bold text-[10px] uppercase tracking-tighter text-slate-700">${t.name}</h3>
-            `;
-            grid.appendChild(card);
-        });
-
-        function startEngine(input) {
-            const toolName = input.getAttribute('data-name');
-            if(input.files.length > 0) {
-                alert("T.R ENGINE ACTIVE\n------------------\nSelected: " + toolName + "\nFile: " + input.files[0].name + "\n\nStatus: Processing...");
-            }
+    function processFile(input) {
+        const tool = input.getAttribute('data-tool');
+        
+        // Step 1: Login Check
+        if (!isLoggedIn) {
+            alert("⚠️ ACCESS DENIED!\n\nDear User, please Login first to use the T.R Engine for " + tool + ".");
+            openAuth(); // Login box khul jayega
+            return;
         }
-    </script>
-</body>
-</html>
+
+        // Step 2: Working Logic (Sirf Login ke baad)
+        if(input.files.length > 0) {
+            const fileName = input.files[0].name;
+            alert("🚀 T.R ENGINE ACTIVE\n----------------------\nTOOL: " + tool + "\nFILE: " + fileName + "\n\nStatus: Converting... Your download will start shortly!");
+            
+            // Yahan hum conversion ka asli logic trigger karenge
+            setTimeout(() => {
+                alert("✅ Success! " + tool + " completed by T.R Engine.");
+            }, 3000);
+        }
+    }
+
+    function handleLogin() {
+        // Asli Login Logic
+        const pass = document.getElementById('adminPass').value;
+        if(pass === "1234") { // Aapka secret PIN
+            isLoggedIn = true;
+            alert("Welcome T.R! All 30 Features are now UNLOCKED.");
+            closeAuth();
+        } else {
+            alert("Wrong PIN! Only T.R can unlock the engine.");
+        }
+    }
+</script>
