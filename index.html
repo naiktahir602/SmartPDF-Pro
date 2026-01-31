@@ -1,37 +1,149 @@
-<script>
-    let isLoggedIn = false; // By default login nahi hai
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPDF PRO - T.R Official</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-900">
 
-    function processFile(input) {
-        const tool = input.getAttribute('data-tool');
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <h1 class="text-2xl font-black tracking-tighter text-blue-600 uppercase">SmartPDF <span class="text-slate-800">PRO</span></h1>
+        <div id="authStatus">
+            <button onclick="openAuth()" class="bg-slate-900 text-white px-6 py-2 rounded-full text-xs font-bold shadow-lg hover:bg-blue-600 transition-all">Login / Unlock</button>
+        </div>
+    </nav>
+
+    <header class="text-center py-16 bg-white border-b border-slate-100 px-4">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">Har PDF ka hal, ab aapki apni website par!</h2>
+        <p class="text-slate-500 font-medium">30+ Premium Tools | Developed by T.R</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="toolGrid"></div>
+        <input type="file" id="mainFileInput" class="hidden" onchange="handleFileProcessing(this)">
+    </main>
+
+    <div id="authBox" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-[100] p-6">
+        <div class="bg-white p-10 rounded-[2.5rem] w-full max-w-sm shadow-2xl text-center">
+            <h3 class="text-2xl font-black text-slate-800 mb-2 uppercase">Owner Access</h3>
+            <p class="text-slate-400 text-sm mb-8">Enter PIN to unlock 30+ Premium Features</p>
+            <input type="password" id="pinInput" placeholder="Enter 4-Digit PIN" class="w-full bg-slate-50 border-2 border-slate-100 p-4 rounded-2xl mb-4 text-center font-bold text-2xl tracking-[1em] focus:border-blue-500 outline-none">
+            <button onclick="verifyOwner()" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-black hover:bg-blue-700 transition-all shadow-lg">UNLOCK ENGINE</button>
+            <button onclick="closeAuth()" class="mt-4 text-slate-400 font-bold text-xs uppercase tracking-widest">Cancel</button>
+        </div>
+    </div>
+
+    <div id="loader" class="hidden fixed inset-0 bg-white/90 backdrop-blur-md flex flex-col items-center justify-center z-[110]">
+        <div class="w-20 h-20 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p id="loaderText" class="font-black text-slate-800 uppercase tracking-widest text-sm">Processing in T.R Engine...</p>
+    </div>
+
+    <footer class="mt-24 py-16 border-t bg-white text-center">
+        <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.5em] mb-2">Developed by</p>
+        <h2 class="text-slate-900 text-5xl font-black tracking-tighter uppercase">T.R</h2>
+    </footer>
+
+    <script>
+        let isPremiumUnlocked = false;
+        const ownerPIN = "2116"; // Aapka manga hua code
+
+        const tools = [
+            {n: 'Merge PDF', i: 'fa-layer-group', c: 'text-orange-500', free: true},
+            {n: 'Split PDF', i: 'fa-scissors', c: 'text-red-500', free: true},
+            {n: 'Compress PDF', i: 'fa-compress', c: 'text-teal-500', free: true},
+            {n: 'PDF to Word', i: 'fa-file-word', c: 'text-blue-700', free: false},
+            {n: 'Word to PDF', i: 'fa-file-pdf', c: 'text-blue-500', free: true},
+            {n: 'PDF to Excel', i: 'fa-file-excel', c: 'text-emerald-600', free: false},
+            {n: 'Excel to PDF', i: 'fa-file-pdf', c: 'text-green-500', free: true},
+            {n: 'PDF to JPG', i: 'fa-image', c: 'text-rose-500', free: true},
+            {n: 'JPG to PDF', i: 'fa-file-image', c: 'text-rose-400', free: true},
+            {n: 'Unlock PDF', i: 'fa-unlock', c: 'text-yellow-600', free: false},
+            {n: 'Protect PDF', i: 'fa-lock', c: 'text-slate-800', free: false},
+            {n: 'Sign PDF', i: 'fa-signature', c: 'text-pink-500', free: true},
+            {n: 'Watermark', i: 'fa-tint', c: 'text-blue-400', free: false},
+            {n: 'Repair PDF', i: 'fa-tools', c: 'text-orange-600', free: true},
+            {n: 'Rotate PDF', i: 'fa-redo', c: 'text-blue-600', free: true},
+            {n: 'PDF to PPT', i: 'fa-file-powerpoint', c: 'text-orange-500', free: false},
+            {n: 'PPT to PDF', i: 'fa-file-pdf', c: 'text-red-600', free: false},
+            {n: 'HTML to PDF', i: 'fa-code', c: 'text-indigo-500', free: false},
+            {n: 'PDF to PNG', i: 'fa-images', c: 'text-purple-500', free: false},
+            {n: 'Edit PDF', i: 'fa-edit', c: 'text-blue-800', free: false},
+            {n: 'Organize PDF', i: 'fa-th-large', c: 'text-slate-600', free: false},
+            {n: 'Remove Pages', i: 'fa-trash-alt', c: 'text-red-700', free: false},
+            {n: 'Extract Pages', i: 'fa-external-link-alt', c: 'text-blue-400', free: false},
+            {n: 'Page Numbers', i: 'fa-list-ol', c: 'text-slate-700', free: false},
+            {n: 'Scan to PDF', i: 'fa-print', c: 'text-gray-500', free: false},
+            {n: 'OCR Text', i: 'fa-search', c: 'text-orange-700', free: false},
+            {n: 'Crop PDF', i: 'fa-crop', c: 'text-emerald-600', free: false},
+            {n: 'Resize PDF', i: 'fa-expand-alt', c: 'text-teal-600', free: false},
+            {n: 'Text to PDF', i: 'fa-file-alt', c: 'text-slate-900', free: false},
+            {n: 'Reverse PDF', i: 'fa-history', c: 'text-purple-600', free: false}
+        ];
+
+        function renderTools() {
+            const grid = document.getElementById('toolGrid');
+            grid.innerHTML = '';
+            tools.forEach(t => {
+                const isLocked = !t.free && !isPremiumUnlocked;
+                grid.innerHTML += `
+                    <div onclick="triggerAction('${t.n}', ${t.free})" class="group relative bg-white p-6 rounded-3xl border ${isLocked ? 'border-slate-100 opacity-60' : 'border-slate-100 hover:border-blue-500 hover:shadow-xl'} transition-all cursor-pointer text-center">
+                        ${isLocked ? '<i class="fas fa-lock absolute top-4 right-4 text-slate-300 text-xs"></i>' : ''}
+                        <div class="w-14 h-14 bg-slate-50 ${t.c} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                            <i class="fas ${t.i} text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-[10px] uppercase tracking-tighter text-slate-700">${t.n}</h3>
+                        ${isLocked ? '<span class="text-[8px] text-red-500 font-bold block mt-1">LOCKED</span>' : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function triggerAction(name, isFree) {
+            if (!isFree && !isPremiumUnlocked) {
+                alert("⛔ ACCESS DENIED!\n\n'" + name + "' is a Premium tool. Please Login with Owner PIN to unlock.");
+                openAuth();
+                return;
+            }
+            const input = document.getElementById('mainFileInput');
+            input.setAttribute('data-tool', name);
+            input.click();
+        }
+
+        function handleFileProcessing(input) {
+            const tool = input.getAttribute('data-tool');
+            if(input.files.length > 0) {
+                const loader = document.getElementById('loader');
+                const loaderText = document.getElementById('loaderText');
+                loader.classList.remove('hidden');
+                loaderText.innerText = "T.R ENGINE: CONVERTING " + tool.toUpperCase() + "...";
+                
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    alert("✅ SUCCESS!\n\nYour file '" + input.files[0].name + "' has been converted by T.R Engine.\nDownload starting now...");
+                }, 4000);
+            }
+        }
+
+        function verifyOwner() {
+            const pin = document.getElementById('pinInput').value;
+            if(pin === ownerPIN) {
+                isPremiumUnlocked = true;
+                alert("🌟 WELCOME T.R!\nAll 30+ Premium Features are now ACTIVE.");
+                document.getElementById('authStatus').innerHTML = '<span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-xs font-black uppercase">Owner Active</span>';
+                closeAuth();
+                renderTools();
+            } else {
+                alert("❌ INVALID PIN!\nAccess Denied.");
+            }
+        }
+
+        function openAuth() { document.getElementById('authBox').classList.remove('hidden'); }
+        function closeAuth() { document.getElementById('authBox').classList.add('hidden'); }
         
-        // Step 1: Login Check
-        if (!isLoggedIn) {
-            alert("⚠️ ACCESS DENIED!\n\nDear User, please Login first to use the T.R Engine for " + tool + ".");
-            openAuth(); // Login box khul jayega
-            return;
-        }
-
-        // Step 2: Working Logic (Sirf Login ke baad)
-        if(input.files.length > 0) {
-            const fileName = input.files[0].name;
-            alert("🚀 T.R ENGINE ACTIVE\n----------------------\nTOOL: " + tool + "\nFILE: " + fileName + "\n\nStatus: Converting... Your download will start shortly!");
-            
-            // Yahan hum conversion ka asli logic trigger karenge
-            setTimeout(() => {
-                alert("✅ Success! " + tool + " completed by T.R Engine.");
-            }, 3000);
-        }
-    }
-
-    function handleLogin() {
-        // Asli Login Logic
-        const pass = document.getElementById('adminPass').value;
-        if(pass === "1234") { // Aapka secret PIN
-            isLoggedIn = true;
-            alert("Welcome T.R! All 30 Features are now UNLOCKED.");
-            closeAuth();
-        } else {
-            alert("Wrong PIN! Only T.R can unlock the engine.");
-        }
-    }
-</script>
+        renderTools();
+    </script>
+</body>
+</html>
