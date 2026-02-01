@@ -3,48 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T.R. Digital - SmartPDF PRO</title>
+    <title>SmartPDF PRO - T.R. Associates</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
 </head>
-<body class="bg-slate-50 font-sans">
+<body class="bg-slate-50">
 
-    <header class="p-6 bg-white shadow-md flex justify-between items-center sticky top-0 z-50">
+    <header class="p-6 bg-white shadow-md flex justify-between items-center">
         <div>
-            <h1 class="text-2xl font-black text-blue-700 tracking-tighter">T.R. DIGITAL</h1>
-            <p class="text-[10px] font-bold text-slate-400 uppercase">Premium PDF Associates</p>
+            <h1 class="text-2xl font-black text-blue-700">SmartPDF PRO</h1>
+            <p class="text-[10px] font-bold text-slate-400">BY T.R. ASSOCIATES</p>
         </div>
-        <div id="user-info" class="flex items-center gap-4">
-            <button id="login-btn" onclick="loginWithPhone()" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold">Login</button>
-            <div id="auth-status" class="hidden text-right">
-                <p id="user-phone" class="text-xs font-black text-slate-700"></p>
-                <p id="plan-status" class="text-[10px] font-bold uppercase"></p>
-            </div>
+        <div id="auth-ui">
+            <div id="recaptcha-container"></div>
+            <button id="login-btn" onclick="startLogin()" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold">Login with Phone</button>
+            <span id="user-display" class="hidden font-bold text-blue-600"></span>
         </div>
     </header>
 
-    <div class="bg-blue-600 p-10 text-center text-white">
-        <h2 class="text-3xl font-black mb-2">Professional PDF Tools</h2>
-        <p class="text-blue-100 opacity-80">10 Free Tools (With Ads) | 30+ Pro Tools (No Ads - ₹99/2 Months)</p>
-    </div>
-
-    <main class="max-w-6xl mx-auto p-6">
-        <div id="tools-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            </div>
-    </main>
-
-    <div id="ad-container" class="max-w-4xl mx-auto my-8 p-4 bg-slate-200 text-center rounded-xl text-slate-400 text-xs font-bold">
-        ADVERTISEMENT (Free Plan Active)
-    </div>
+    <main class="max-w-6xl mx-auto p-6 grid grid-cols-2 md:grid-cols-4 gap-6" id="tools-grid">
+        </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-        // Your Firebase Config
+        // Your Exact Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyBr_apLRgu1EFgy3spXaPIMFVi-PiVpuWA",
             authDomain: "smartpdf-pro-951d2.firebaseapp.com",
@@ -58,116 +43,69 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const OWNER_NUMBER = "+916005878981"; 
+        const OWNER = "+916005878981";
         let isPro = false;
 
-        // 30 Tools Definition
-        const tools = [
-            { id: 1, name: "PDF Viewer", icon: "👁️", premium: false },
-            { id: 2, name: "Page Count", icon: "🔢", premium: false },
-            { id: 3, name: "Rotate PDF", icon: "🔄", premium: false },
-            { id: 4, name: "PDF to Image", icon: "🖼️", premium: false },
-            { id: 5, name: "Metadata", icon: "ℹ️", premium: false },
-            { id: 6, name: "Grayscale", icon: "🏁", premium: false },
-            { id: 7, name: "Text Extract", icon: "📝", premium: false },
-            { id: 8, name: "PDF Info", icon: "📂", premium: false },
-            { id: 9, name: "Zoom PDF", icon: "🔍", premium: false },
-            { id: 10, name: "Print PDF", icon: "🖨️", premium: false },
-            { id: 11, name: "PDF to Word", icon: "📄", premium: true },
-            { id: 12, name: "Merge PDF", icon: "🔗", premium: true },
-            { id: 13, name: "Protect PDF", icon: "🔒", premium: true },
-            { id: 14, name: "Unlock PDF", icon: "🔓", premium: true },
-            { id: 15, name: "Compress", icon: "📉", premium: true },
-            { id: 16, name: "Split PDF", icon: "✂️", premium: true },
-            { id: 17, name: "Watermark", icon: "💧", premium: true },
-            { id: 18, name: "Excel to PDF", icon: "📊", premium: true },
-            { id: 19, name: "E-Sign", icon: "🖋️", premium: true },
-            { id: 20, name: "OCR PDF", icon: "👁️‍🗨️", premium: true },
-            // ... (more tools added to reach 30 in final render)
-        ];
+        // 1. LOGIN SYSTEM FIX
+        window.startLogin = function() {
+            const phone = prompt("Enter your number with +91 (e.g. +916005878981):");
+            if(!phone) return;
+            
+            window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {'size': 'invisible'});
+            signInWithPhoneNumber(auth, phone, window.recaptchaVerifier)
+                .then(res => {
+                    const code = prompt("Enter the 6-digit OTP sent to your phone:");
+                    return res.confirm(code);
+                }).then(() => location.reload())
+                .catch(err => alert("Error: " + err.message));
+        };
 
-        // Auth Logic
+        // 2. CHECK ACCESS & RENDER
         onAuthStateChanged(auth, async (user) => {
-            const statusEl = document.getElementById('auth-status');
-            const loginBtn = document.getElementById('login-btn');
-            const adBox = document.getElementById('ad-container');
-
             if (user) {
-                loginBtn.classList.add('hidden');
-                statusEl.classList.remove('hidden');
-                document.getElementById('user-phone').innerText = user.phoneNumber;
+                document.getElementById('login-btn').classList.add('hidden');
+                document.getElementById('user-display').classList.remove('hidden');
+                document.getElementById('user-display').innerText = user.phoneNumber;
 
-                if (user.phoneNumber === OWNER_NUMBER) {
+                if (user.phoneNumber === OWNER) {
                     isPro = true;
-                    document.getElementById('plan-status').innerText = "Owner Access (Lifetime)";
-                    document.getElementById('plan-status').className = "text-[10px] font-bold text-purple-600";
-                    adBox.style.display = 'none';
                 } else {
-                    const docSnap = await getDoc(doc(db, "users", user.uid));
-                    if (docSnap.exists()) {
-                        const expiry = new Date(docSnap.data().expiryDate);
-                        if (new Date() < expiry) {
-                            isPro = true;
-                            document.getElementById('plan-status').innerText = "Pro Plan (No Ads)";
-                            document.getElementById('plan-status').className = "text-[10px] font-bold text-green-600";
-                            adBox.style.display = 'none';
-                        } else {
-                            document.getElementById('plan-status').innerText = "Plan Expired";
-                            document.getElementById('plan-status').className = "text-[10px] font-bold text-red-600";
-                        }
-                    } else {
-                        document.getElementById('plan-status').innerText = "Free Plan";
-                    }
+                    const d = await getDoc(doc(db, "users", user.uid));
+                    if(d.exists() && new Date() < new Date(d.data().expiryDate)) isPro = true;
                 }
             }
             renderTools();
         });
 
-        // Razorpay Payment
-        window.startPayment = function() {
-            var options = {
-                "key": "YOUR_RAZORPAY_KEY", // Tomorrow: Add your Live Key here
-                "amount": "9900",
-                "name": "T.R. Digital",
-                "description": "2 Months Pro Access",
-                "handler": async function(res) {
-                    const expiry = new Date();
-                    expiry.setDate(expiry.getDate() + 60);
-                    await setDoc(doc(db, "users", auth.currentUser.uid), {
-                        expiryDate: expiry.toISOString(),
-                        isPro: true
-                    });
-                    location.reload();
-                }
-            };
-            new Razorpay(options).open();
-        }
-
-        // Feature Click Controller
-        window.handleTool = (id, premium) => {
-            if (premium && !auth.currentUser) {
-                alert("T.R. Digital: Login required for Pro Tools!");
-                return;
-            }
-            if (premium && !isPro) {
-                if(confirm("T.R. Digital Pro: Pay ₹99 for 2 Months Access?")) {
-                    startPayment();
+        // 3. FILE SELECTION LOGIC
+        window.triggerTool = (name, premium) => {
+            if(premium && !isPro) {
+                if(confirm("This is a PRO tool. Pay ₹99 for 2 months access?")) {
+                    // Razorpay logic here
                 }
             } else {
-                alert("Actual Tool Function Starting: Converting/Processing PDF...");
-                // Here we call actual PDF processing functions
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.pdf';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    alert("T.R. Digital: Processing file " + file.name + " for " + name);
+                };
+                input.click();
             }
-        }
+        };
 
         function renderTools() {
-            const grid = document.getElementById('tools-grid');
-            grid.innerHTML = tools.map(t => `
-                <div onclick="handleTool(${t.id}, ${t.premium})" class="p-6 bg-white border border-slate-200 rounded-3xl text-center hover:scale-105 transition-all cursor-pointer shadow-sm hover:shadow-xl">
-                    <div class="text-4xl mb-3">${t.icon}</div>
-                    <div class="font-black text-slate-800 text-sm leading-tight">${t.name}</div>
-                    <div class="mt-2 text-[9px] font-black uppercase tracking-tighter ${t.premium ? 'text-blue-600' : 'text-slate-400'}">
-                        ${t.premium ? 'Pro (₹99)' : 'Free'}
-                    </div>
+            const list = [
+                {n: "PDF Viewer", p: false}, {n: "PDF to Word", p: true}, 
+                {n: "Merge PDF", p: true}, {n: "Compress PDF", p: true}
+            ];
+            document.getElementById('tools-grid').innerHTML = list.map(t => `
+                <div onclick="triggerTool('${t.n}', ${t.p})" class="bg-white p-8 rounded-3xl shadow-lg text-center cursor-pointer hover:bg-blue-50 transition">
+                    <h3 class="font-black text-slate-800">${t.n}</h3>
+                    <p class="text-[10px] mt-2 font-bold ${t.p ? 'text-blue-600' : 'text-slate-400'}">
+                        ${t.p ? 'PRO (₹99)' : 'FREE'}
+                    </p>
                 </div>
             `).join('');
         }
