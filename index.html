@@ -7,21 +7,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50 font-sans">
 
-    <header class="p-6 bg-white shadow-md flex justify-between items-center">
+    <header class="p-6 bg-white shadow-md flex justify-between items-center sticky top-0 z-50">
         <div>
-            <h1 class="text-2xl font-black text-blue-700">SmartPDF PRO</h1>
-            <p class="text-[10px] font-bold text-slate-400">BY T.R. ASSOCIATES</p>
+            <h1 class="text-2xl font-black text-blue-700 tracking-tighter">SmartPDF PRO</h1>
+            <p class="text-[10px] font-bold text-slate-400 uppercase">Premium PDF Associates</p>
         </div>
-        <div id="auth-ui">
+        <div id="auth-section">
             <div id="recaptcha-container"></div>
-            <button id="login-btn" onclick="startLogin()" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold">Login with Phone</button>
-            <span id="user-display" class="hidden font-bold text-blue-600"></span>
+            <button id="login-btn" onclick="startLogin()" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Login with Phone</button>
+            <span id="user-display" class="hidden font-black text-blue-600 border-b-2 border-blue-600 pb-1"></span>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto p-6 grid grid-cols-2 md:grid-cols-4 gap-6" id="tools-grid">
+    <main class="max-w-6xl mx-auto p-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6" id="tools-grid">
         </main>
 
     <script type="module">
@@ -29,7 +29,7 @@
         import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-        // Your Exact Firebase Config
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyBr_apLRgu1EFgy3spXaPIMFVi-PiVpuWA",
             authDomain: "smartpdf-pro-951d2.firebaseapp.com",
@@ -43,24 +43,24 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        const OWNER = "+916005878981";
+        const OWNER = "+916005878981"; //
         let isPro = false;
 
-        // 1. LOGIN SYSTEM FIX
+        // 1. LOGIN & OTP SYSTEM FIX
         window.startLogin = function() {
-            const phone = prompt("Enter your number with +91 (e.g. +916005878981):");
+            const phone = prompt("Enter number with +91 (e.g. +916005878981):");
             if(!phone) return;
             
             window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {'size': 'invisible'});
             signInWithPhoneNumber(auth, phone, window.recaptchaVerifier)
                 .then(res => {
-                    const code = prompt("Enter the 6-digit OTP sent to your phone:");
+                    const code = prompt("Enter 6-digit OTP:");
                     return res.confirm(code);
                 }).then(() => location.reload())
-                .catch(err => alert("Error: " + err.message));
+                .catch(err => alert("Auth Error: " + err.message));
         };
 
-        // 2. CHECK ACCESS & RENDER
+        // 2. CHECK ACCESS
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 document.getElementById('login-btn').classList.add('hidden');
@@ -68,7 +68,7 @@
                 document.getElementById('user-display').innerText = user.phoneNumber;
 
                 if (user.phoneNumber === OWNER) {
-                    isPro = true;
+                    isPro = true; //
                 } else {
                     const d = await getDoc(doc(db, "users", user.uid));
                     if(d.exists() && new Date() < new Date(d.data().expiryDate)) isPro = true;
@@ -77,11 +77,11 @@
             renderTools();
         });
 
-        // 3. FILE SELECTION LOGIC
-        window.triggerTool = (name, premium) => {
+        // 3. ASLI FILE CHOOSE OPTION
+        window.openTool = (name, premium) => {
             if(premium && !isPro) {
-                if(confirm("This is a PRO tool. Pay ₹99 for 2 months access?")) {
-                    // Razorpay logic here
+                if(confirm("T.R. Digital: Pay ₹99 for 2 months access?")) {
+                    // Razorpay logic tomorrow
                 }
             } else {
                 const input = document.createElement('input');
@@ -89,22 +89,24 @@
                 input.accept = '.pdf';
                 input.onchange = (e) => {
                     const file = e.target.files[0];
-                    alert("T.R. Digital: Processing file " + file.name + " for " + name);
+                    alert("T.R. Digital: File selected: " + file.name + "\nStarting " + name + " process...");
                 };
-                input.click();
+                input.click(); // Asli file picker yahan se khulega
             }
         };
 
         function renderTools() {
-            const list = [
+            const tools = [
                 {n: "PDF Viewer", p: false}, {n: "PDF to Word", p: true}, 
-                {n: "Merge PDF", p: true}, {n: "Compress PDF", p: true}
+                {n: "Merge PDF", p: true}, {n: "Compress PDF", p: true},
+                {n: "Protect PDF", p: true}, {n: "Unlock PDF", p: true}
             ];
-            document.getElementById('tools-grid').innerHTML = list.map(t => `
-                <div onclick="triggerTool('${t.n}', ${t.p})" class="bg-white p-8 rounded-3xl shadow-lg text-center cursor-pointer hover:bg-blue-50 transition">
-                    <h3 class="font-black text-slate-800">${t.n}</h3>
-                    <p class="text-[10px] mt-2 font-bold ${t.p ? 'text-blue-600' : 'text-slate-400'}">
-                        ${t.p ? 'PRO (₹99)' : 'FREE'}
+            document.getElementById('tools-grid').innerHTML = tools.map(t => `
+                <div onclick="openTool('${t.n}', ${t.p})" class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 text-center cursor-pointer hover:shadow-2xl hover:bg-blue-50 transition-all">
+                    <div class="text-4xl mb-4">${t.p ? '⭐' : '📄'}</div>
+                    <h3 class="font-black text-slate-800 text-sm tracking-tight">${t.n}</h3>
+                    <p class="text-[9px] mt-2 font-bold uppercase tracking-widest ${t.p ? 'text-blue-600' : 'text-slate-400'}">
+                        ${t.p ? 'Pro Plan' : 'Free Tool'}
                     </p>
                 </div>
             `).join('');
