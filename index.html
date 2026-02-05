@@ -7,17 +7,33 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-12 rounded-3xl shadow-2xl text-center border-t-8 border-red-600 max-w-md w-full">
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">SmartPDF Pro</h1>
-        <p class="text-gray-500 mb-10 font-medium">Fast & Secure PDF Solutions</p>
+
+    <div class="bg-white p-10 rounded-3xl shadow-2xl text-center border-t-8 border-red-600 max-w-sm w-full">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">SmartPDF Pro</h1>
+        <p class="text-gray-500 mb-8 font-medium">Fast & Secure PDF Solutions</p>
         
         <div class="space-y-4">
-            <button onclick="alert('SmartPDF Pro: Please pay ₹99 for 2 Months Access.')" 
-                    class="w-full bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-red-700 active:scale-95 transition-all">
-                Access Premium Tools
+            <button onclick="handleTool('Premium', true)" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-red-700 transition-all">
+                Premium Editor (₹99)
             </button>
-            <p class="text-xs text-gray-400">Trusted by Professionals</p>
+            <button onclick="handleTool('Free', false)" class="w-full border-2 border-gray-200 py-3 rounded-xl font-bold text-gray-600 hover:bg-gray-50 transition-all">
+                Free Tools
+            </button>
         </div>
     </div>
+
+    <script>
+        // Aapka asli logic jo ab sahi kaam karega
+        function handleTool(name, isPremium) {
+            if (isPremium) {
+                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
+            } else {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.pdf';
+                input.click();
+            }
+        }
+    </script>
 </body>
 </html>
