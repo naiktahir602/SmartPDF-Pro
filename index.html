@@ -1,29 +1,35 @@
-// SmartPDF-Pro Fixed Logic
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartPDF Pro</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        .btn { padding: 15px 25px; background: red; color: white; border: none; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to SmartPDF Pro</h1>
+    <p>Select a tool to begin:</p>
+    
+    <button class="btn" onclick="handleToolClick('PDF Converter', false)">Open PDF Converter</button>
 
-// 1. FILE CHOOSE FIX (Ab asli files khulengi)
-window.handleToolClick = (toolName, isPremium) => {
-    if (isPremium && !isProUser) {
-        alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
-    } else {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = '.pdf';
-        fileInput.onchange = (e) => {
-            const file = e.target.files[0];
-            alert("File Selected: " + file.name + "\nProcessing " + toolName + "...");
+    <script>
+        // Aapka wahi logic jo aapne likha hai
+        window.handleToolClick = (toolName, isPremium) => {
+            if (isPremium) {
+                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months...");
+            } else {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = '.pdf';
+                fileInput.onchange = (e) => {
+                    const file = e.target.files[0];
+                    alert("File Selected: " + file.name + "\nProcessing...");
+                };
+                fileInput.click();
+            }
         };
-        fileInput.click(); // Ye line aapka mobile gallery kholegi
-    }
-};
-
-// 2. MOBILE SCANNER FIX (Seedha camera khulega)
-window.startScanner = () => {
-    const camInput = document.createElement('input');
-    camInput.type = 'file';
-    camInput.accept = 'image/*';
-    camInput.capture = 'environment'; // Isse pichla camera khulega
-    camInput.onchange = (e) => {
-        alert("SmartPDF-Pro: Document Scanned! Converting to PDF...");
-    };
-    camInput.click();
-};
+    </script>
+</body>
+</html>
