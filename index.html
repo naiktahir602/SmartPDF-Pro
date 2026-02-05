@@ -4,43 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartPDF Pro</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; background-color: #f4f4f4; }
-        .container { background: white; padding: 30px; border-radius: 10px; display: inline-block; shadow: 0px 0px 10px rgba(0,0,0,0.1); }
-        .btn { background-color: #e11d48; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; }
-        .btn:hover { background-color: #be123c; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-    <div class="container">
-        <h1>Welcome to SmartPDF Pro</h1>
-        <p>Select a tool to begin your conversion:</p>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-12 rounded-3xl shadow-2xl text-center border-t-8 border-red-600 max-w-md w-full">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">SmartPDF Pro</h1>
+        <p class="text-gray-500 mb-10 font-medium">Fast & Secure PDF Solutions</p>
         
-        <button class="btn" onclick="handleToolClick('PDF Converter', false)">Open PDF Converter</button>
-        <br><br>
-        <button class="btn" style="background-color: #f59e0b;" onclick="handleToolClick('Premium Editor', true)">Premium Editor (PRO)</button>
+        <div class="space-y-4">
+            <button onclick="alert('SmartPDF Pro: Please pay ₹99 for 2 Months Access.')" 
+                    class="w-full bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-red-700 active:scale-95 transition-all">
+                Access Premium Tools
+            </button>
+            <p class="text-xs text-gray-400">Trusted by Professionals</p>
+        </div>
     </div>
-
-    <script>
-        // Aapka asli logic jo image mein dikh raha hai
-        window.handleToolClick = (toolName, isPremium) => {
-            const isProUser = false; // By default user pro nahi hai
-
-            if (isPremium && !isProUser) {
-                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
-            } else {
-                const fileInput = document.createElement('input');
-                fileInput.type = 'file';
-                fileInput.accept = '.pdf';
-                fileInput.onchange = (e) => {
-                    const file = e.target.files[0];
-                    alert("File Selected: " + file.name + "\nProcessing " + toolName + "...");
-                };
-                fileInput.click();
-            }
-        };
-    </script>
-
 </body>
 </html>
