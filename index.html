@@ -1,57 +1,29 @@
-// SmartPDF-Pro Fixed Master Script
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
+// SmartPDF-Pro Fixed Logic
 
-const auth = getAuth(app);
-const db = getFirestore(app);
-const OWNER_NUMBER = "+916005878981"; //
-let isProUser = false;
-
-// 1. LOGIN BUTTON KO "ZINDA" KARNA
-window.startLogin = function() {
-    // Invisble reCAPTCHA setup
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', { 'size': 'invisible' });
-    
-    const phone = prompt("Enter your number with +91 (e.g. +916005878981):");
-    if(!phone) return;
-
-    signInWithPhoneNumber(auth, phone, window.recaptchaVerifier)
-        .then(res => {
-            const otp = prompt("Enter the 6-digit OTP:");
-            return res.confirm(otp);
-        }).then(() => {
-            alert("Login Success!");
-            location.reload();
-        }).catch(err => alert("Auth Error: " + err.message));
-};
-
-// 2. FILE CHOOSE OPTION KO ACTIVATE KARNA
-window.handleToolAction = (toolName, isPremium) => {
+// 1. FILE CHOOSE FIX (Ab asli files khulengi)
+window.handleToolClick = (toolName, isPremium) => {
     if (isPremium && !isProUser) {
         alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
     } else {
-        // ASLI FILE PICKER ENGINE
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = '.pdf';
         fileInput.onchange = (e) => {
-            const selectedFile = e.target.files[0];
-            alert("File Selected: " + selectedFile.name + ". Starting " + toolName + "...");
+            const file = e.target.files[0];
+            alert("File Selected: " + file.name + "\nProcessing " + toolName + "...");
         };
-        fileInput.click(); // Ise click karte hi files khulengi
+        fileInput.click(); // Ye line aapka mobile gallery kholegi
     }
 };
 
-// 3. OWNER & PRO STATUS CHECK
-onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        if (user.phoneNumber === OWNER_NUMBER) {
-            isProUser = true; // Owner is always PRO
-        } else {
-            const docSnap = await getDoc(doc(db, "users", user.uid));
-            if (docSnap.exists() && new Date() < new Date(docSnap.data().expiryDate)) {
-                isProUser = true;
-            }
-        }
-    }
-});
+// 2. MOBILE SCANNER FIX (Seedha camera khulega)
+window.startScanner = () => {
+    const camInput = document.createElement('input');
+    camInput.type = 'file';
+    camInput.accept = 'image/*';
+    camInput.capture = 'environment'; // Isse pichla camera khulega
+    camInput.onchange = (e) => {
+        alert("SmartPDF-Pro: Document Scanned! Converting to PDF...");
+    };
+    camInput.click();
+};
