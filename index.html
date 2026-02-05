@@ -1,35 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>SmartPDF Pro</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        .btn { padding: 15px 25px; background: red; color: white; border: none; cursor: pointer; border-radius: 5px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPDF Pro - Fast & Secure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <h1>Welcome to SmartPDF Pro</h1>
-    <p>Select a tool to begin:</p>
-    
-    <button class="btn" onclick="handleToolClick('PDF Converter', false)">Open PDF Converter</button>
+<body class="bg-gray-50 font-sans">
+
+    <nav class="bg-white shadow-sm p-4 text-center">
+        <h1 class="text-2xl font-bold text-red-600">SmartPDF Pro</h1>
+    </nav>
+
+    <div class="max-w-4xl mx-auto p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-6 text-center">Hamare PDF Tools Select Karein</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div onclick="handleTool('Word to PDF', false)" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer border-t-4 border-blue-500">
+                <i class="fa-solid fa-file-word text-blue-500 text-3xl mb-3"></i>
+                <h3 class="font-bold text-lg">Word to PDF</h3>
+                <p class="text-sm text-gray-500">Apni Word file ko PDF mein badlein.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">FREE</span>
+            </div>
+
+            <div onclick="handleTool('PDF to Word', true)" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer border-t-4 border-red-500">
+                <i class="fa-solid fa-file-pdf text-red-500 text-3xl mb-3"></i>
+                <h3 class="font-bold text-lg">PDF to Word</h3>
+                <p class="text-sm text-gray-500 text-premium">PDF se edit hone layak document banayein.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">PRO</span>
+            </div>
+
+            <div onclick="handleTool('Merge PDF', false)" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer border-t-4 border-purple-500">
+                <i class="fa-solid fa-layer-group text-purple-500 text-3xl mb-3"></i>
+                <h3 class="font-bold text-lg">Merge PDF</h3>
+                <p class="text-sm text-gray-500">Kayi PDF files ko ek saath jodein.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">FREE</span>
+            </div>
+
+            <div onclick="handleTool('Edit PDF', true)" class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition cursor-pointer border-t-4 border-yellow-500">
+                <i class="fa-solid fa-pen-to-square text-yellow-500 text-3xl mb-3"></i>
+                <h3 class="font-bold text-lg">Edit PDF</h3>
+                <p class="text-sm text-gray-500">PDF ke andar ka content badlein.</p>
+                <span class="inline-block mt-3 text-xs font-bold text-orange-600 bg-orange-100 px-2 py-1 rounded">PRO</span>
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        // Aapka wahi logic jo aapne likha hai
-        window.handleToolClick = (toolName, isPremium) => {
+        function handleTool(name, isPremium) {
             if (isPremium) {
-                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months...");
+                alert("SmartPDF-Pro: Ye ek Premium feature hai. Kripya ₹99 pay karein 2 months ke access ke liye.");
             } else {
-                const fileInput = document.createElement('input');
-                fileInput.type = 'file';
-                fileInput.accept = '.pdf';
-                fileInput.onchange = (e) => {
-                    const file = e.target.files[0];
-                    alert("File Selected: " + file.name + "\nProcessing...");
-                };
-                fileInput.click();
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.onchange = e => {
+                    alert(name + " shuru ho raha hai: " + e.target.files[0].name);
+                }
+                input.click();
             }
-        };
+        }
     </script>
 </body>
 </html>
