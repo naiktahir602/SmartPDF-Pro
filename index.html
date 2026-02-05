@@ -3,35 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro</title>
+    <title>SmartPDF Pro - Developed by T.R</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .premium-card { border: 2px solid #fee2e2; position: relative; }
+        .premium-badge { position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: bold; }
+        .ad-space { background: #f3f4f6; border: 1px dashed #d1d5db; text-align: center; color: #9ca3af; font-size: 12px; padding: 10px; margin-top: 10px; border-radius: 8px; }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-slate-50 font-sans text-gray-900">
 
-    <div class="bg-white p-10 rounded-3xl shadow-2xl text-center border-t-8 border-red-600 max-w-sm w-full">
-        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">SmartPDF Pro</h1>
-        <p class="text-gray-500 mb-8 font-medium">Fast & Secure PDF Solutions</p>
-        
-        <div class="space-y-4">
-            <button onclick="handleTool('Premium', true)" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-red-700 transition-all">
-                Premium Editor (₹99)
-            </button>
-            <button onclick="handleTool('Free', false)" class="w-full border-2 border-gray-200 py-3 rounded-xl font-bold text-gray-600 hover:bg-gray-50 transition-all">
-                Free Tools
-            </button>
+    <nav class="bg-white shadow-sm p-4 flex justify-between items-center px-6 md:px-16 sticky top-0 z-50">
+        <div class="text-2xl font-black text-red-600">SmartPDF-Pro</div>
+        <div class="flex items-center space-x-4 md:space-x-8">
+            <a href="#" class="text-gray-600 font-bold hover:text-red-600">Login</a>
+            <button class="bg-red-600 text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-red-700">Signup</button>
         </div>
-    </div>
+    </nav>
+
+    <header class="py-16 text-center bg-white border-b px-4">
+        <h1 class="text-4xl md:text-5xl font-black mb-4">All your PDF work <span class="text-red-600">simplified in one place</span></h1>
+        <p class="text-gray-500 text-lg font-bold tracking-widest uppercase">Developed by T.R</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 md:p-12">
+        
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2"><i class="fa-solid fa-gift text-green-500"></i> Free Tools (With Ads)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-16" id="free-tools">
+            </div>
+
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-red-600"><i class="fa-solid fa-crown text-yellow-500"></i> Premium Tools (Ad-Free)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" id="premium-tools">
+            </div>
+
+    </main>
+
+    <footer class="py-10 text-center border-t bg-white mt-10">
+        <p class="font-bold text-gray-400 uppercase tracking-widest">Official Project by T.R</p>
+    </footer>
 
     <script>
-        // Aapka asli logic jo ab sahi kaam karega
+        const freeTools = ["Word to PDF", "PDF to Word", "Merge PDF", "Split PDF", "Compress PDF", "Excel to PDF", "PDF to JPG", "Rotate PDF", "Watermark", "Unlock PDF"];
+        
+        const premiumTools = ["PDF Editor Pro", "E-Sign PDF", "OCR Text Scanner", "HTML to PDF", "Protect PDF", "Compare PDF", "Repair PDF", "Organize PDF", "Scan to PDF", "PDF to PowerPoint", "Batch Convert", "API Access", "Cloud Sync", "Custom Branding", "Direct Print", "Extract Images", "PDF Optimizer", "Dark Mode Editor", "Voice to PDF", "Auto-Fill Forms"];
+
+        // Free Tools Render
+        const freeContainer = document.getElementById('free-tools');
+        freeTools.forEach(tool => {
+            freeContainer.innerHTML += `
+                <div onclick="handleTool('${tool}', false)" class="bg-white p-5 rounded-xl border hover:border-red-500 cursor-pointer shadow-sm transition">
+                    <i class="fa-solid fa-file-pdf text-red-600 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-sm">${tool}</h3>
+                    <div class="ad-space">Google Ad Here</div>
+                </div>`;
+        });
+
+        // Premium Tools Render
+        const premiumContainer = document.getElementById('premium-tools');
+        premiumTools.forEach(tool => {
+            premiumContainer.innerHTML += `
+                <div onclick="handleTool('${tool}', true)" class="bg-white p-5 rounded-xl premium-card hover:shadow-lg cursor-pointer transition">
+                    <span class="premium-badge text-yellow-100">PRO</span>
+                    <i class="fa-solid fa-star text-yellow-500 text-2xl mb-3"></i>
+                    <h3 class="font-bold text-sm text-gray-800">${tool}</h3>
+                </div>`;
+        });
+
         function handleTool(name, isPremium) {
             if (isPremium) {
-                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
+                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access to use " + name + " (Ad-Free).");
             } else {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = '.pdf';
-                input.click();
+                alert("SmartPDF-Pro: Opening " + name + "... (Loading Ads)");
+                const input = document.createElement('input'); input.type = 'file'; input.click();
             }
         }
     </script>
