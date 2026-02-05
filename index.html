@@ -1,104 +1,46 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro - Professional PDF Toolkit</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>SmartPDF Pro</title>
     <style>
-        .gradient-text { background: linear-gradient(to right, #e11d48, #be123c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card-hover:hover { transform: translateY(-5px); transition: 0.3s; }
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; background-color: #f4f4f4; }
+        .container { background: white; padding: 30px; border-radius: 10px; display: inline-block; shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+        .btn { background-color: #e11d48; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 18px; }
+        .btn:hover { background-color: #be123c; }
     </style>
 </head>
-<body class="bg-slate-50 font-sans">
+<body>
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50 p-4 flex justify-between items-center px-4 md:px-12">
-        <div class="text-2xl font-bold text-red-600">SmartPDF<span class="text-gray-800 text-sm">PRO</span></div>
-        <div class="space-x-6 hidden md:flex font-medium text-gray-600">
-            <a href="#home" class="hover:text-red-600">Home</a>
-            <a href="#tools" class="hover:text-red-600">Tools</a>
-            <a href="#pricing" class="hover:text-red-600">Pricing</a>
-            <a href="#blog" class="hover:text-red-600">Blog</a>
-        </div>
-        <button onclick="alert('Login Page: Under Construction')" class="bg-red-600 text-white px-6 py-2 rounded-full font-bold shadow-md hover:bg-red-700">Login</button>
-    </nav>
-
-    <section id="home" class="py-20 text-center px-4">
-        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 uppercase">SmartPDF Pro</h1>
-        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Your Ultimate PDF Toolkit. Convert, Edit, Merge & Secure with ease.</p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="#tools" class="bg-red-600 text-white px-8 py-3 rounded-lg font-bold">Get Started</a>
-            <button class="border-2 border-gray-300 px-8 py-3 rounded-lg font-bold hover:bg-gray-100">Explore Tools</button>
-        </div>
-    </section>
-
-    <section id="tools" class="py-16 bg-white px-4 md:px-12">
-        <h2 class="text-3xl font-bold text-center mb-12">Hamare PDF Tools</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div onclick="handleTool('Word to PDF', false)" class="card-hover p-8 bg-slate-50 rounded-2xl border cursor-pointer text-center">
-                <i class="fa-solid fa-file-pdf text-blue-500 text-4xl mb-4"></i>
-                <h3 class="font-bold text-xl">Word to PDF</h3>
-                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold uppercase mt-2 inline-block">Free</span>
-            </div>
-            <div onclick="handleTool('PDF Editor', true)" class="card-hover p-8 bg-slate-50 rounded-2xl border cursor-pointer text-center relative border-yellow-400">
-                <i class="fa-solid fa-pen-nib text-yellow-500 text-4xl mb-4"></i>
-                <h3 class="font-bold text-xl">Premium Editor</h3>
-                <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-1 rounded font-bold uppercase mt-2 inline-block">PRO</span>
-            </div>
-            <div onclick="handleTool('Merge PDF', false)" class="card-hover p-8 bg-slate-50 rounded-2xl border cursor-pointer text-center">
-                <i class="fa-solid fa-layer-group text-purple-500 text-4xl mb-4"></i>
-                <h3 class="font-bold text-xl">Merge PDF</h3>
-                <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-bold uppercase mt-2 inline-block">Free</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="py-16 bg-slate-100 px-4">
-        <h2 class="text-3xl font-bold text-center mb-12">Sahi Plan Chunein</h2>
-        <div class="max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-red-600">
-            <div class="bg-red-600 text-white text-center py-4 text-xl font-bold uppercase tracking-widest">Premium Plan</div>
-            <div class="p-8 text-center">
-                <div class="text-5xl font-black mb-4">₹99 <span class="text-lg text-gray-500">/ 2 Months</span></div>
-                <ul class="text-left space-y-4 mb-8 text-gray-600">
-                    <li><i class="fa-solid fa-check text-green-500 mr-2"></i> All Premium Tools Unlock</li>
-                    <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Ad-Free Experience</li>
-                    <li><i class="fa-solid fa-check text-green-500 mr-2"></i> 24/7 Support</li>
-                </ul>
-                <button onclick="alert('SmartPDF-Pro: Payment Gateway coming soon! Please pay ₹99.')" class="w-full bg-red-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-red-700">Upgrade Now</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="blog" class="py-16 bg-white px-4 md:px-12">
-        <h2 class="text-3xl font-bold text-center mb-12">Latest Articles</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="border rounded-xl p-6 hover:shadow-md">
-                <h4 class="font-bold text-lg mb-2">How to Secure your PDF?</h4>
-                <p class="text-gray-500 text-sm">Sikhiye kaise apne documents ko password se protect karein...</p>
-            </div>
-            <div class="border rounded-xl p-6 hover:shadow-md">
-                <h4 class="font-bold text-lg mb-2">Word vs PDF: Kaunsa behtar?</h4>
-                <p class="text-gray-500 text-sm">Janiye professional kaam ke liye kis format ka use karein...</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-gray-900 text-gray-400 py-12 text-center">
-        <p>&copy; 2026 SmartPDF Pro. All Rights Reserved.</p>
-    </footer>
+    <div class="container">
+        <h1>Welcome to SmartPDF Pro</h1>
+        <p>Select a tool to begin your conversion:</p>
+        
+        <button class="btn" onclick="handleToolClick('PDF Converter', false)">Open PDF Converter</button>
+        <br><br>
+        <button class="btn" style="background-color: #f59e0b;" onclick="handleToolClick('Premium Editor', true)">Premium Editor (PRO)</button>
+    </div>
 
     <script>
-        function handleTool(name, isPremium) {
-            if (isPremium) {
-                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access."); //
+        // Aapka asli logic jo image mein dikh raha hai
+        window.handleToolClick = (toolName, isPremium) => {
+            const isProUser = false; // By default user pro nahi hai
+
+            if (isPremium && !isProUser) {
+                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access.");
             } else {
-                alert("SmartPDF-Pro: " + name + " shuru ho raha hai...");
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.click();
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = '.pdf';
+                fileInput.onchange = (e) => {
+                    const file = e.target.files[0];
+                    alert("File Selected: " + file.name + "\nProcessing " + toolName + "...");
+                };
+                fileInput.click();
             }
-        }
+        };
     </script>
+
 </body>
 </html>
