@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartPDF Pro - T.R Edition</title>
+    <title>SmartPDF-Pro | Real Conversion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -13,83 +13,77 @@
         @keyframes spinner { to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-gray-900">
+<body class="bg-slate-50 font-sans">
 
-    <nav class="bg-white shadow-sm p-4 flex justify-between items-center px-6 md:px-16 sticky top-0 z-50">
+    <nav class="bg-white shadow-sm p-4 flex justify-between items-center px-6 md:px-16">
         <div class="text-2xl font-black text-red-600 italic">SmartPDF-Pro</div>
-        <div class="flex items-center space-x-8 font-bold text-gray-600">
-            <button class="bg-red-600 text-white px-6 py-2 rounded-lg shadow-md">Signup</button>
-        </div>
+        <button class="bg-red-600 text-white px-6 py-2 rounded-lg font-bold">Signup</button>
     </nav>
 
-    <div id="uploadOverlay" class="fixed inset-0 bg-white z-[200] flex-col items-center justify-center">
-        <button onclick="location.reload()" class="absolute top-10 left-10 text-gray-400 hover:text-red-600 text-xl font-bold italic"><i class="fa-solid fa-arrow-left"></i> BACK</button>
-        
+    <div id="uploadOverlay" class="fixed inset-0 bg-white z-[200] flex-col items-center justify-center active-overlay">
         <div class="text-center max-w-2xl w-full px-4" id="uploadContent">
-            <h2 id="toolHeader" class="text-4xl font-black text-gray-800 mb-2 italic uppercase">Word to PDF</h2>
-            <div class="my-12">
-                <input type="file" id="fileInput" class="hidden" onchange="startConversion(event)">
-                <button onclick="document.getElementById('fileInput').click()" class="bg-[#e5322d] text-white px-16 py-8 rounded-2xl text-3xl font-bold shadow-2xl hover:bg-[#c42824] transition-all">Select file</button>
-            </div>
+            <h2 class="text-4xl font-black text-gray-800 mb-2 italic uppercase">Word to PDF</h2>
+            <p class="mb-8 text-gray-500 font-bold">Convert your .docx to high-quality PDF</p>
+            
+            <input type="file" id="fileInput" class="hidden" accept=".doc,.docx" onchange="startConversion(event)">
+            <button onclick="document.getElementById('fileInput').click()" class="bg-[#e5322d] text-white px-16 py-8 rounded-2xl text-3xl font-bold shadow-2xl hover:scale-105 transition-all">
+                Select Word File
+            </button>
         </div>
 
         <div id="processingState" class="flex-col items-center">
             <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
-            <h2 class="text-2xl font-black italic text-gray-800 uppercase">Converting...</h2>
+            <h2 class="text-2xl font-black italic text-gray-800 uppercase animate-pulse">Converting...</h2>
         </div>
 
         <div id="downloadState" class="flex-col items-center">
             <i class="fa-solid fa-circle-check text-green-500 text-7xl mb-4"></i>
-            <h2 class="text-3xl font-black italic text-gray-800 mb-6 uppercase">Task Completed!</h2>
-            <button id="finalDownloadBtn" class="bg-green-600 text-white px-16 py-8 rounded-2xl text-3xl font-bold shadow-2xl hover:bg-green-700">DOWNLOAD PDF</button>
+            <h2 class="text-3xl font-black italic text-gray-800 mb-6 uppercase">File Ready!</h2>
+            <button id="finalDownloadBtn" class="bg-green-600 text-white px-16 py-8 rounded-2xl text-3xl font-bold shadow-2xl hover:bg-green-700">
+                DOWNLOAD PDF
+            </button>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto p-6 md:p-12 text-center">
-        <h1 class="text-4xl font-black mb-12 italic">All your PDF work <span class="text-red-600">simplified</span></h1>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div onclick="openUpload('Word to PDF')" class="bg-white p-8 rounded-xl border shadow-sm cursor-pointer hover:border-red-500 transition"><i class="fa-solid fa-file-word text-blue-600 text-5xl mb-4"></i><p class="font-bold">Word to PDF</p></div>
-        </div>
-    </main>
-
     <script>
-        function openUpload(title) {
-            document.getElementById('toolHeader').innerText = title;
-            document.getElementById('uploadOverlay').classList.add('active-overlay');
-            document.getElementById('uploadContent').style.display = 'block';
-        }
-
         async function startConversion(e) {
             const file = e.target.files[0];
             if (!file) return;
 
+            // Step 1: Show Loading
             document.getElementById('uploadContent').style.display = 'none';
             document.getElementById('processingState').style.display = 'flex';
 
+            // Step 2: Use your Real API Key
             const myApiKey = "220|uZA15VAic7zzHi4IWdq0jq9v8g1NkOhf0Qsb0Zgc8de68de5";
-
             const formData = new FormData();
             formData.append('File', file);
 
             try {
+                // Step 3: Call ConvertHub API
                 const response = await fetch(`https://v2.convertapi.com/convert/doc/to/pdf?Secret=${myApiKey}`, {
                     method: 'POST',
                     body: formData
                 });
+                
                 const result = await response.json();
                 
                 if (result.Files && result.Files[0]) {
+                    // Step 4: 2 Second Animation as requested
                     setTimeout(() => {
                         document.getElementById('processingState').style.display = 'none';
                         document.getElementById('downloadState').style.display = 'flex';
-                        document.getElementById('finalDownloadBtn').onclick = () => window.open(result.Files[0].Url, '_blank');
+                        
+                        // Set the actual download link
+                        const downloadBtn = document.getElementById('finalDownloadBtn');
+                        downloadBtn.onclick = () => window.location.href = result.Files[0].Url;
                     }, 2000);
                 } else {
-                    alert("API Limit khatam ya error! Dashboard check karein.");
+                    alert("Error: API limit or Key issue. Check dashboard.");
                     location.reload();
                 }
             } catch (err) {
-                alert("Server busy, try again.");
+                alert("Server busy. Please try again.");
                 location.reload();
             }
         }
