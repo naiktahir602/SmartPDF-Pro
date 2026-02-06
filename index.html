@@ -1,25 +1,109 @@
-<div onclick="handleTool('Compare PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-    <span class="premium-badge">PRO</span>
-    <i class="fa-solid fa-not-equal text-orange-600 text-4xl mb-3"></i>
-    <h3 class="font-bold text-sm text-gray-800">Compare PDF</h3>
-</div>
-<div onclick="handleTool('Repair PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-    <span class="premium-badge">PRO</span>
-    <i class="fa-solid fa-screwdriver-wrench text-blue-500 text-4xl mb-3"></i>
-    <h3 class="font-bold text-sm text-gray-800">Repair PDF</h3>
-</div>
-<div onclick="handleTool('Organize PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-    <span class="premium-badge">PRO</span>
-    <i class="fa-solid fa-folder-tree text-indigo-600 text-4xl mb-3"></i>
-    <h3 class="font-bold text-sm text-gray-800">Organize PDF</h3>
-</div>
-<div onclick="handleTool('Scan to PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-    <span class="premium-badge">PRO</span>
-    <i class="fa-solid fa-print text-gray-600 text-4xl mb-3"></i>
-    <h3 class="font-bold text-sm text-gray-800">Scan to PDF</h3>
-</div>
-<div onclick="handleTool('PPT to PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-    <span class="premium-badge">PRO</span>
-    <i class="fa-solid fa-file-powerpoint text-orange-700 text-4xl mb-3"></i>
-    <h3 class="font-bold text-sm text-gray-800">PPT to PDF</h3>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPDF Pro - Developed by T.R</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .premium-card { border: 1px solid #e5e7eb; position: relative; transition: 0.3s; }
+        .premium-card:hover { border-color: #ef4444; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .premium-badge { position: absolute; top: 8px; right: 8px; background: #ef4444; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-gray-900">
+
+    <nav class="bg-white shadow-sm p-4 flex justify-between items-center px-6 md:px-16 sticky top-0 z-50">
+        <div class="text-2xl font-black text-red-600 italic">SmartPDF-Pro</div>
+        <div class="flex items-center space-x-8 font-bold text-gray-600">
+            <a href="#" class="hover:text-red-600">Login</a>
+            <button class="bg-red-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-700">Signup</button>
+        </div>
+    </nav>
+
+    <header class="py-16 text-center bg-white border-b px-4">
+        <h1 class="text-4xl md:text-5xl font-black mb-4">All your PDF work <span class="text-red-600">simplified in one place</span></h1>
+        <p class="text-gray-500 text-lg font-bold tracking-widest uppercase">Developed by T.R</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 md:p-12">
+        
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 border-l-4 border-blue-500 pl-3">
+            <i class="fa-solid fa-folder-open text-blue-500"></i> Free Tools
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16" id="free-tools-grid"></div>
+
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-red-600 border-l-4 border-red-600 pl-3">
+            <i class="fa-solid fa-crown text-yellow-500"></i> Premium Tools
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6" id="premium-tools-grid"></div>
+
+    </main>
+
+    <footer class="py-10 text-center border-t bg-white mt-10">
+        <p class="font-bold text-gray-400 uppercase tracking-widest text-sm">Official Project by T.R</p>
+    </footer>
+
+    <script>
+        const freeTools = [
+            { name: "Word to PDF", icon: "fa-file-word text-blue-600" },
+            { name: "PDF to Word", icon: "fa-file-pdf text-red-500" },
+            { name: "Merge PDF", icon: "fa-layer-group text-purple-600" },
+            { name: "Split PDF", icon: "fa-scissors text-gray-500" },
+            { name: "Compress PDF", icon: "fa-file-contract text-orange-500" },
+            { name: "Excel to PDF", icon: "fa-file-excel text-green-600" },
+            { name: "PDF to JPG", icon: "fa-file-image text-pink-500" },
+            { name: "Rotate PDF", icon: "fa-rotate text-indigo-500" },
+            { name: "Watermark", icon: "fa-droplet text-blue-400" },
+            { name: "Unlock PDF", icon: "fa-lock-open text-green-500" }
+        ];
+
+        const premiumTools = [
+            { name: "PDF Editor Pro", icon: "fa-pen-nib text-red-600" },
+            { name: "E-Sign PDF", icon: "fa-signature text-blue-700" },
+            { name: "OCR Scanner", icon: "fa-magnifying-glass-chart text-gray-700" },
+            { name: "HTML to PDF", icon: "fa-code text-green-500" },
+            { name: "Protect PDF", icon: "fa-shield-halved text-red-700" },
+            { name: "Compare PDF", icon: "fa-not-equal text-orange-600" },
+            { name: "Repair PDF", icon: "fa-screwdriver-wrench text-blue-500" },
+            { name: "Organize PDF", icon: "fa-folder-tree text-indigo-600" },
+            { name: "Scan to PDF", icon: "fa-print text-gray-600" },
+            { name: "PPT to PDF", icon: "fa-file-powerpoint text-orange-700" },
+            { name: "Batch Convert", icon: "fa-files text-blue-400" },
+            { name: "API Access", icon: "fa-gears text-gray-500" },
+            { name: "Cloud Sync", icon: "fa-cloud text-sky-500" },
+            { name: "Branding", icon: "fa-tags text-pink-600" },
+            { name: "Direct Print", icon: "fa-print text-black" },
+            { name: "Extract Images", icon: "fa-images text-yellow-600" },
+            { name: "PDF Optimizer", icon: "fa-bolt text-yellow-400" },
+            { name: "Dark Editor", icon: "fa-moon text-slate-800" },
+            { name: "Voice to PDF", icon: "fa-microphone text-red-500" },
+            { name: "Auto-Fill", icon: "fa-keyboard text-green-600" }
+        ];
+
+        const render = (data, containerId, isPremium) => {
+            const container = document.getElementById(containerId);
+            data.forEach(tool => {
+                container.innerHTML += `
+                    <div onclick="handleTool('${tool.name}', ${isPremium})" class="bg-white p-6 rounded-xl border hover:border-red-500 cursor-pointer shadow-sm transition ${isPremium ? 'premium-card' : ''}">
+                        ${isPremium ? '<span class="premium-badge">PRO</span>' : ''}
+                        <i class="fa-solid ${tool.icon} text-4xl mb-3"></i>
+                        <h3 class="font-bold text-sm text-gray-700">${tool.name}</h3>
+                    </div>`;
+            });
+        };
+
+        render(freeTools, 'free-tools-grid', false);
+        render(premiumTools, 'premium-tools-grid', true);
+
+        function handleTool(name, isPremium) {
+            if (isPremium) {
+                alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access to use " + name);
+            } else {
+                const input = document.createElement('input'); input.type = 'file'; input.click();
+            }
+        }
+    </script>
+</body>
+</html>
