@@ -15,102 +15,122 @@
 <body class="bg-slate-50 font-sans text-gray-900">
 
     <nav class="bg-white shadow-sm p-4 flex justify-between items-center px-6 md:px-16 sticky top-0 z-50">
-        <div class="text-2xl font-black text-red-600">SmartPDF-Pro</div>
+        <div class="text-2xl font-black text-red-600 italic">SmartPDF-Pro</div>
         <div class="flex items-center space-x-8 font-bold">
             <a href="#" class="text-gray-600 hover:text-red-600">Login</a>
-            <button class="bg-red-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-700">Signup</button>
+            <button class="bg-red-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-700 transition">Signup</button>
         </div>
     </nav>
 
     <header class="py-16 text-center bg-white border-b px-4">
-        <h1 class="text-4xl md:text-5xl font-black mb-4 italic text-gray-800">All your PDF work <span class="text-red-600">simplified in one place</span></h1>
+        <h1 class="text-4xl md:text-5xl font-black mb-4 text-gray-800 tracking-tight">
+            All your PDF work <span class="text-red-600">simplified in one place</span>
+        </h1>
         <p class="text-gray-500 text-lg font-bold tracking-widest uppercase">Developed by T.R</p>
     </header>
 
     <main class="max-w-7xl mx-auto p-6 md:p-12">
         
-        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2"><i class="fa-solid fa-gift text-blue-500"></i> Free Tools</h2>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16" id="free-tools">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 border-l-4 border-blue-500 pl-3">
+            <i class="fa-solid fa-folder-open text-blue-500"></i> Free Tools
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+            <div onclick="handleTool('Word to PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-file-word text-blue-600 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Word to PDF</h3>
             </div>
+            <div onclick="handleTool('PDF to Word', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-file-pdf text-red-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">PDF to Word</h3>
+            </div>
+            <div onclick="handleTool('Merge PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-layer-group text-purple-600 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Merge PDF</h3>
+            </div>
+            <div onclick="handleTool('Split PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-scissors text-gray-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Split PDF</h3>
+            </div>
+            <div onclick="handleTool('Compress PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-file-contract text-orange-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Compress PDF</h3>
+            </div>
+            <div onclick="handleTool('Excel to PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-file-excel text-green-600 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Excel to PDF</h3>
+            </div>
+            <div onclick="handleTool('PDF to JPG', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-file-image text-pink-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">PDF to JPG</h3>
+            </div>
+            <div onclick="handleTool('Rotate PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-rotate text-indigo-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Rotate PDF</h3>
+            </div>
+            <div onclick="handleTool('Watermark', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-droplet text-blue-400 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Watermark</h3>
+            </div>
+            <div onclick="handleTool('Unlock PDF', false)" class="bg-white p-6 rounded-xl border hover:border-blue-500 cursor-pointer shadow-sm transition">
+                <i class="fa-solid fa-lock-open text-green-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-700">Unlock PDF</h3>
+            </div>
+        </div>
 
-        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-red-600"><i class="fa-solid fa-crown text-yellow-500"></i> Premium Tools</h2>
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="premium-tools">
+        <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-red-600 border-l-4 border-red-600 pl-3">
+            <i class="fa-solid fa-crown text-yellow-500"></i> Premium Tools
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div onclick="handleTool('PDF Editor Pro', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-pen-nib text-red-600 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">PDF Editor Pro</h3>
             </div>
+            <div onclick="handleTool('E-Sign PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-signature text-blue-700 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">E-Sign PDF</h3>
+            </div>
+            <div onclick="handleTool('OCR Text Scanner', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-magnifying-glass-chart text-gray-700 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">OCR Text Scanner</h3>
+            </div>
+            <div onclick="handleTool('HTML to PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-code text-green-500 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">HTML to PDF</h3>
+            </div>
+            <div onclick="handleTool('Protect PDF', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-shield-halved text-red-700 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">Protect PDF</h3>
+            </div>
+            <div onclick="handleTool('Auto-Fill Forms', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
+                <span class="premium-badge">PRO</span>
+                <i class="fa-solid fa-keyboard text-green-600 text-4xl mb-3"></i>
+                <h3 class="font-bold text-sm text-gray-800">Auto-Fill Forms</h3>
+            </div>
+        </div>
 
     </main>
 
-    <footer class="py-10 text-center border-t bg-white mt-10 text-gray-400 font-bold uppercase tracking-widest">
-        Official Project by T.R
+    <footer class="py-10 text-center border-t bg-white mt-10">
+        <p class="font-bold text-gray-400 uppercase tracking-widest text-sm">Official Project by T.R</p>
+        <p class="text-xs text-gray-300 mt-2 italic">Designed by T.R</p>
     </footer>
 
     <script>
-        // Free Tools Data with Icons
-        const freeTools = [
-            { name: "Word to PDF", icon: "fa-file-word text-blue-600" },
-            { name: "PDF to Word", icon: "fa-file-pdf text-red-500" },
-            { name: "Merge PDF", icon: "fa-layer-group text-purple-500" },
-            { name: "Split PDF", icon: "fa-scissors text-gray-600" },
-            { name: "Compress PDF", icon: "fa-compress text-orange-500" },
-            { name: "Excel to PDF", icon: "fa-file-excel text-green-600" },
-            { name: "PDF to JPG", icon: "fa-file-image text-pink-500" },
-            { name: "Rotate PDF", icon: "fa-rotate text-indigo-500" },
-            { name: "Watermark", icon: "fa-stamp text-blue-400" },
-            { name: "Unlock PDF", icon: "fa-lock-open text-green-500" }
-        ];
-        
-        // Premium Tools Data with Icons
-        const premiumTools = [
-            { name: "PDF Editor Pro", icon: "fa-pen-nib text-red-600" },
-            { name: "E-Sign PDF", icon: "fa-signature text-blue-700" },
-            { name: "OCR Scanner", icon: "fa-viewfinder text-gray-700" },
-            { name: "HTML to PDF", icon: "fa-code text-green-500" },
-            { name: "Protect PDF", icon: "fa-shield-halved text-red-700" },
-            { name: "Compare PDF", icon: "fa-not-equal text-orange-600" },
-            { name: "Repair PDF", icon: "fa-wrench text-blue-500" },
-            { name: "Organize PDF", icon: "fa-folder-tree text-indigo-600" },
-            { name: "Scan to PDF", icon: "fa-print text-gray-600" },
-            { name: "PPT to PDF", icon: "fa-file-powerpoint text-orange-700" },
-            { name: "Batch Convert", icon: "fa-files text-blue-400" },
-            { name: "API Access", icon: "fa-gears text-gray-500" },
-            { name: "Cloud Sync", icon: "fa-cloud text-sky-500" },
-            { name: "Branding", icon: "fa-tags text-pink-600" },
-            { name: "Direct Print", icon: "fa-print text-black" },
-            { name: "Extract Images", icon: "fa-images text-yellow-600" },
-            { name: "PDF Optimizer", icon: "fa-bolt text-yellow-400" },
-            { name: "Dark Editor", icon: "fa-moon text-slate-800" },
-            { name: "Voice to PDF", icon: "fa-microphone text-red-500" },
-            { name: "Auto-Fill", icon: "fa-keyboard text-green-600" }
-        ];
-
-        // Render Free Tools
-        const freeContainer = document.getElementById('free-tools');
-        freeTools.forEach(tool => {
-            freeContainer.innerHTML += `
-                <div onclick="handleTool('${tool.name}', false)" class="bg-white p-6 rounded-xl border hover:border-red-500 cursor-pointer shadow-sm transition">
-                    <i class="fa-solid ${tool.icon} text-3xl mb-3"></i>
-                    <h3 class="font-bold text-xs text-gray-700">${tool.name}</h3>
-                </div>`;
-        });
-
-        // Render Premium Tools
-        const premiumContainer = document.getElementById('premium-tools');
-        premiumTools.forEach(tool => {
-            premiumContainer.innerHTML += `
-                <div onclick="handleTool('${tool.name}', true)" class="bg-white p-6 rounded-xl premium-card cursor-pointer">
-                    <span class="premium-badge text-white">PRO</span>
-                    <i class="fa-solid ${tool.icon} text-3xl mb-3"></i>
-                    <h3 class="font-bold text-xs text-gray-800">${tool.name}</h3>
-                </div>`;
-        });
-
         function handleTool(name, isPremium) {
             if (isPremium) {
                 alert("SmartPDF-Pro: Please pay ₹99 for 2 Months Access to use " + name);
             } else {
-                alert("SmartPDF-Pro: Opening " + name + "...");
-                const input = document.createElement('input'); input.type = 'file'; input.click();
+                alert("SmartPDF-Pro: Loading " + name + "...");
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.click();
             }
-        }  
+        }
     </script>
 </body>
 </html>
